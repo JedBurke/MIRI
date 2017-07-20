@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Windows Desktop
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaUpdatesCheck", "MangaUpdatesCheck.csproj", "{5E2107DF-686B-4552-8195-9290C2A56B19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MangaUpdatesCheck_Tests", "..\MangaUpdatesCheck_Tests\MangaUpdatesCheck_Tests.csproj", "{033B67E7-32F8-4B16-B0C9-A7FB08B8E69C}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5E2107DF-686B-4552-8195-9290C2A56B19} = {5E2107DF-686B-4552-8195-9290C2A56B19}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5E2107DF-686B-4552-8195-9290C2A56B19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E2107DF-686B-4552-8195-9290C2A56B19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E2107DF-686B-4552-8195-9290C2A56B19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E2107DF-686B-4552-8195-9290C2A56B19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{033B67E7-32F8-4B16-B0C9-A7FB08B8E69C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{033B67E7-32F8-4B16-B0C9-A7FB08B8E69C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{033B67E7-32F8-4B16-B0C9-A7FB08B8E69C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{033B67E7-32F8-4B16-B0C9-A7FB08B8E69C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
