@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MangaUpdatesCheck.Serialization
+{
+    public interface IResults
+    {
+        long TotalResults { get; set; }
+        int StartIndex { get; set; }
+        int itemsPerPage { get; set; }
+        Item[] Items { get; set; }
+    }
+}

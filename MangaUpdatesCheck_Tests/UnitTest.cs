@@ -42,7 +42,9 @@ namespace MangaUpdatesCheck_Tests
         [TestMethod]
         public void ParseDocument_Test()
         {
-            var item = SeriesDataParser.Parse(Properties.Resources.Baka_Updates_Manga___Itoshi_no_Kana);
+            // Todo: Deprecate 'SeriesDataParser.Parse()' in favor of lazy parsing.
+            //var item = SeriesDataParser.Parse(Properties.Resources.Baka_Updates_Manga___Itoshi_no_Kana);
+            var item = new SeriesData(Properties.Resources.Baka_Updates_Manga___Itoshi_no_Kana);
             Console.WriteLine("Is fully scanlated: {0}", item.IsFullyScanlated);
         }
     }

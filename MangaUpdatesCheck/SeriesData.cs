@@ -17,7 +17,8 @@ namespace MangaUpdatesCheck
 
         private string _content = string.Empty;
         private string _title = string.Empty;
-        private bool? _isCompleted = false;
+        private bool? _isCompleted;
+        private bool? _isFullyScanlated;
 
         public SeriesData()
             : this(string.Empty)
@@ -45,18 +46,13 @@ namespace MangaUpdatesCheck
         {
             get
             {
-                if (string.IsNullOrEmpty(_title))
+                if (string.IsNullOrEmpty(this._title))
                 {
-                    _title = GetTitle();
+                    this._title = GetTitle();
                 }
 
-                return _title;
-
-
-            }
-            set
-            {
-                _title = value;
+                return this._title;
+                
             }
         }
 
@@ -81,8 +77,15 @@ namespace MangaUpdatesCheck
 
         public bool IsFullyScanlated
         {
-            get;
-            set;
+            get
+            {
+                if (!this._isFullyScanlated.HasValue)
+                {
+                    this._isFullyScanlated = GetIsFullyScanlated();
+                }
+
+                return this._isFullyScanlated.Value;
+            }
         }
 
         public bool IsLicensed
@@ -117,20 +120,26 @@ namespace MangaUpdatesCheck
 
             if (!LazyParsing)
             {
-                Title = GetTitle();
+                this._title = GetTitle();
                 this._isCompleted = GetIsCompleted();
             }
         }
 
         private string GetTitle()
         {
-            return null;
+            return string.Empty;
+        }
+
+        private string GetDescription()
+        {
+            return string.Empty;
         }
 
         private bool GetIsCompleted()
         {            
-            string XpathStatusInCountry = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[13]/b";
-            string XpathStatusInCountryComplete = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[14]";
+            string 
+                XpathStatusInCountry = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[13]/b",
+                XpathStatusInCountryComplete = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[14]";
 
             /// Check the series' status in its country.
             var country = ParsedDocument.DocumentNode.SelectSingleNode(XpathStatusInCountry);
@@ -143,6 +152,28 @@ namespace MangaUpdatesCheck
                 if (status != null)
                 {
                     return Regex.IsMatch(status.InnerText, Resources.ScrapeStatusInCountryComplete, regexOptions);
+                }
+            }
+
+            return false;
+        }
+
+        private bool GetIsFullyScanlated()
+        {
+            string 
+                XpathScanlationStatus = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[15]/b",
+                XpathCompletelyScanlated = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[16]";
+
+            // Check the scanlation status of the series.
+            var scanlated = ParsedDocument.DocumentNode.SelectSingleNode(XpathScanlationStatus);
+
+            if (scanlated != null && Regex.IsMatch(scanlated.InnerText, Resources.ScrapeScanlatedText, regexOptions))
+            {
+                var status = ParsedDocument.DocumentNode.SelectSingleNode(XpathCompletelyScanlated);
+
+                if (status != null)
+                {
+                    return Regex.IsMatch(status.InnerText, Resources.ScrapeScanlatedConfirmText, regexOptions);
                 }
             }
 

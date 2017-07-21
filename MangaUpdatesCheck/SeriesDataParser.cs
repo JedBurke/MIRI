@@ -50,7 +50,7 @@ namespace MangaUpdatesCheck
 
                 if (status != null)
                 {
-                    seriesData.IsFullyScanlated = Regex.IsMatch(status.InnerText, Resources.ScrapeScanlatedConfirmText, regexOptions);
+                    //seriesData.IsFullyScanlated = Regex.IsMatch(status.InnerText, Resources.ScrapeScanlatedConfirmText, regexOptions);
                 }
             }
 

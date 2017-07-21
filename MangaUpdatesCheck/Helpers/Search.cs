@@ -5,9 +5,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace MangaUpdatesCheck
+namespace MangaUpdatesCheck.Helpers
 {
-    public class Helpers
+    public class Search
     {
         /// <summary>
         /// Formats the parameter for use with POST or GET web requests.

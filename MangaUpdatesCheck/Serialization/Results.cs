@@ -8,7 +8,7 @@ using System.Runtime.Serialization;
 namespace MangaUpdatesCheck.Serialization
 {
     [DataContract(Name = "results", Namespace = "http://www.mangaupdates.com/xml")]
-    public class Results
+    public class Results : IResults
     {
         [DataMember(Name = "totalResults")]
         public long TotalResults { get; set; }

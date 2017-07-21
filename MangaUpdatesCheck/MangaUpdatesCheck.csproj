@@ -43,7 +43,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helpers.cs" />
+    <Compile Include="Helpers\Search.cs" />
+    <Compile Include="ISerializeResults.cs" />
     <Compile Include="ISeriesData.cs" />
     <Compile Include="ISeriesDataParser.cs" />
     <Compile Include="Main.cs" />
@@ -54,8 +55,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SearchResultOutput.cs" />
+    <Compile Include="Serialization\IResults.cs" />
     <Compile Include="Serialization\Item.cs" />
     <Compile Include="Serialization\Results.cs" />
+    <Compile Include="SerializeResults.cs" />
     <Compile Include="SeriesData.cs" />
     <Compile Include="SeriesDataParser.cs" />
   </ItemGroup>
