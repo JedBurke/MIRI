@@ -12,11 +12,26 @@ using System.Runtime.Serialization.Json;
 
 namespace MangaUpdatesCheck
 {
-    public class Series
+    /// <summary>
+    /// Provides methods used to search and scrape data from Manga-Updates.
+    /// </summary>
+    public class MangaUpdatesSearch : IMangaUpdatesSearch
     {
+        /// <summary>
+        /// Initializes a new instance of the MangaUpdatesSearch class.
+        /// </summary>
+        public MangaUpdatesSearch()
+        {
+        }
+
         public async Task<ISeriesData> SearchAsync(string series)
         {
             return await Task.Run(() => Search(series));
+        }
+
+        public async Task<ISeriesData> SearchAsync(string series, SearchResultOutput outputType)
+        {
+            return await Task.Run(() => Search(series, outputType));
         }
 
         public ISeriesData Search(string series)
@@ -30,7 +45,7 @@ namespace MangaUpdatesCheck
             string seriesSanitized = null;
             Serialization.IResults results = null;
             System.Collections.Specialized.NameValueCollection param = null;
-
+            
             try
             {
                 seriesSanitized = Helpers.Search.FormatParameters(series);
@@ -45,7 +60,7 @@ namespace MangaUpdatesCheck
                 // Todo: Check, probably not best practice to convert an enum to string like this.
                 param.Add("output", outputType.ToString().ToLower());
 
-                response = PerformQuery(new Uri(Properties.Resources.SeriesSearchUri), param);
+                response = PostQuery(new Uri(Properties.Resources.SeriesSearchUri), param);
 
                 using (var serializeResults = new SerializeResults())
                 {
@@ -74,7 +89,7 @@ namespace MangaUpdatesCheck
             }
         }
 
-        private byte[] PerformQuery(Uri queryUri, NameValueCollection parameters)
+        private byte[] PostQuery(Uri queryUri, NameValueCollection parameters)
         {
             byte[] response = null;
             int tries = 0;
@@ -131,6 +146,6 @@ namespace MangaUpdatesCheck
             return parsedContent;
 
         }
-
+        
     }
 }

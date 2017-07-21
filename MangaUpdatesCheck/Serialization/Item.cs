@@ -7,8 +7,10 @@ using System.Runtime.Serialization;
 
 namespace MangaUpdatesCheck.Serialization
 {
+    // Todo: Move to interface.
+
     [DataContract(Name = "item")]
-    public class Item
+    public class Item : IResultItem
     {
         [DataMember(Name = "id")]
         public int Id { get; set;}

@@ -14,7 +14,7 @@ namespace MangaUpdatesCheck_Tests
         [TestMethod]
         public void Search_Test()
         {
-            Series series = new Series();
+            MangaUpdatesSearch series = new MangaUpdatesSearch();
             var item = series.Search("Itoshi no Kana");
             Console.WriteLine("Is fully scanlated: {0}", item.IsFullyScanlated);
         }
