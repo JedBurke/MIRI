@@ -60,7 +60,7 @@ namespace MangaUpdatesCheck
                 // Todo: Check, probably not best practice to convert an enum to string like this.
                 param.Add("output", outputType.ToString().ToLower());
 
-                response = PostQuery(new Uri(Properties.Resources.SeriesSearchUri), param);
+                response = Helpers.Downloader.Instance.UploadValues(new Uri(Properties.Resources.SeriesSearchUri), param); //PostQuery(new Uri(Properties.Resources.SeriesSearchUri), param);
 
                 using (var serializeResults = new SerializeResults())
                 {
@@ -88,33 +88,7 @@ namespace MangaUpdatesCheck
                 }
             }
         }
-
-        private byte[] PostQuery(Uri queryUri, NameValueCollection parameters)
-        {
-            byte[] response = null;
-            int tries = 0;
-
-            while (tries++ < 5)
-            {
-                try
-                {
-                    using (var request = new System.Net.WebClient())
-                    {
-                        response = request.UploadValues(new Uri(Properties.Resources.SeriesSearchUri), parameters);
-                        break;
-                    }
-
-                }
-                catch (System.Net.WebException)
-                {
-                    // Log exception and retry.
-                }
-            }
-
-            return response;
-
-        }
-
+        
         public ISeriesData FetchSeriesData(int id)
         {
             return FetchSeriesData(new Uri(string.Format(Properties.Resources.SeriesUriFormat, id)));
@@ -123,29 +97,18 @@ namespace MangaUpdatesCheck
         public ISeriesData FetchSeriesData(Uri uri)
         {
             ISeriesData parsedContent = null;
-            int tries = 0;
-
-            while (tries++ < 5)
-            {
-                try
-                {
-                    using (var client = new System.Net.WebClient())
-                    {
-                        string content = client.DownloadString(uri);
-
-                        parsedContent = SeriesDataParser.Parse(content);
-                    }
-                }
-                catch (WebException)
-                {
-                    // Log exception and retry.
-
-                }
-            }
-
+            
+            parsedContent = new SeriesData(Helpers.Downloader.Instance.DownloadString(uri));
+            
             return parsedContent;
 
         }
-        
+
+
+
+        public ISeriesData FetchSeriesData(string series)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

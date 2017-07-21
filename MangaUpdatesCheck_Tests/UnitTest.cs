@@ -1,5 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using MangaUpdatesCheck;
+using MangaUpdatesCheck.Helpers;
 using System;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
@@ -46,6 +47,18 @@ namespace MangaUpdatesCheck_Tests
             //var item = SeriesDataParser.Parse(Properties.Resources.Baka_Updates_Manga___Itoshi_no_Kana);
             var item = new SeriesData(Properties.Resources.Baka_Updates_Manga___Itoshi_no_Kana);
             Console.WriteLine("Is fully scanlated: {0}", item.IsFullyScanlated);
+        }
+
+        [TestMethod]
+        public void Downloader_Test()
+        {
+            Console.WriteLine(Downloader.Instance.DownloadString(new Uri("https://www.google.com")));
+        }
+
+        [TestMethod]
+        public void DownloaderUpload_Test()
+        {
+            
         }
     }
 }
