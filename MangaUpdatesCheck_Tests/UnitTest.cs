@@ -23,6 +23,7 @@ namespace MangaUpdatesCheck_Tests
             Console.WriteLine("Title: {0}", item.Title);
             Console.WriteLine("---------------");
             Console.WriteLine("Description: {0}", item.Description);
+            Console.WriteLine("Series type: {0}", item.SeriesType);
             Console.WriteLine("Is completed: {0} | Is fully scanlated: {1}", item.IsCompleted, item.IsFullyScanlated);
         }
 

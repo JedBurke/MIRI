@@ -12,10 +12,11 @@ namespace MangaUpdatesCheck
         string Description { get; }
         bool IsCompleted { get; }
         bool IsFullyScanlated { get; }
-        bool IsLicensed { get; set; }
+        bool IsLicensed { get; }
 
-        string Author { get; set; }
-        string Illustrator { get; set; }
+        string Author { get; }
+        string Illustrator { get; }
+        string SeriesType { get; }
 
     }
 }

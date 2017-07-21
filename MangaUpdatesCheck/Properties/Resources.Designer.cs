@@ -97,6 +97,15 @@ namespace MangaUpdatesCheck.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        internal static string ScrapeTypeText {
+            get {
+                return ResourceManager.GetString("ScrapeTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to https://www.mangaupdates.com/series.html.
         /// </summary>
         internal static string SeriesSearchUri {

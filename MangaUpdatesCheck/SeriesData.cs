@@ -20,6 +20,7 @@ namespace MangaUpdatesCheck
         private string _description = string.Empty;
         private bool? _isCompleted;
         private bool? _isFullyScanlated;
+        private string _seriesType = string.Empty;
 
         public SeriesData()
             : this(string.Empty)
@@ -112,6 +113,18 @@ namespace MangaUpdatesCheck
         {
             get;
             set;
+        }
+
+        public string SeriesType
+        {
+            get {
+                if (string.IsNullOrEmpty(_seriesType))
+                {
+                    _seriesType = GetSeriesType();
+                }
+
+                return _seriesType;
+            }
         }
 
         public static SeriesData Empty;
@@ -216,6 +229,27 @@ namespace MangaUpdatesCheck
             }
 
             return false;
+        }
+
+        private string GetSeriesType()
+        {
+            string
+                xPathTypeCategory = "/html/body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[3]/b",
+                xPathType = "//body/div/table/tr[3]/td/table//td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[4]";
+
+            var typeCategoryNode = ParsedDocument.DocumentNode.SelectSingleNode(xPathTypeCategory);
+
+            if (typeCategoryNode != null && Regex.IsMatch(typeCategoryNode.InnerText, Resources.ScrapeTypeText, regexOptions))
+            {
+                var typeNode = ParsedDocument.DocumentNode.SelectSingleNode(xPathType);
+
+                if (typeNode != null && !string.IsNullOrWhiteSpace(typeNode.InnerText))
+                {
+                    return typeNode.InnerText.Trim();
+                }
+            }
+            
+            return string.Empty;
         }
 
     }
