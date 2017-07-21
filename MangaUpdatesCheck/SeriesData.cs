@@ -127,8 +127,6 @@ namespace MangaUpdatesCheck
             }
         }
 
-        public static SeriesData Empty;
-
         private void Parse(string content)
         {
             if (string.IsNullOrEmpty(content))
@@ -143,6 +141,9 @@ namespace MangaUpdatesCheck
             {
                 this._title = GetTitle();
                 this._isCompleted = GetIsCompleted();
+                this._isFullyScanlated = GetIsFullyScanlated();
+                this._description = GetDescription();
+                this._seriesType = GetSeriesType();
             }
         }
 
@@ -251,6 +252,8 @@ namespace MangaUpdatesCheck
             
             return string.Empty;
         }
+
+        public static SeriesData Empty;
 
     }
 }
