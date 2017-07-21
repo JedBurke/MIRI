@@ -17,6 +17,7 @@ namespace MangaUpdatesCheck
 
         private string _content = string.Empty;
         private string _title = string.Empty;
+        private string _description = string.Empty;
         private bool? _isCompleted;
         private bool? _isFullyScanlated;
 
@@ -52,14 +53,21 @@ namespace MangaUpdatesCheck
                 }
 
                 return this._title;
-                
+
             }
         }
 
         public string Description
         {
-            get;
-            set;
+            get
+            {
+                if (string.IsNullOrEmpty(this._description))
+                {
+                    this._description = GetDescription();
+                }
+
+                return this._description;
+            }
         }
 
         public bool IsCompleted
@@ -93,7 +101,7 @@ namespace MangaUpdatesCheck
             get;
             set;
         }
-        
+
         public string Author
         {
             get;
@@ -107,7 +115,7 @@ namespace MangaUpdatesCheck
         }
 
         public static SeriesData Empty;
-                
+
         private void Parse(string content)
         {
             if (string.IsNullOrEmpty(content))
@@ -127,17 +135,47 @@ namespace MangaUpdatesCheck
 
         private string GetTitle()
         {
+            var xPathTitle = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[1]/span[1]";
+            var titleNode = ParsedDocument.DocumentNode.SelectSingleNode(xPathTitle);
+
+            if (titleNode != null)
+            {
+                var title = titleNode.InnerText;
+
+                if (!string.IsNullOrWhiteSpace(title))
+                {
+                    title = title.Trim();
+                }
+
+                return title;
+            }
+
             return string.Empty;
         }
 
         private string GetDescription()
         {
+            var xPathDescription = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[2]";
+            var descriptionNode = ParsedDocument.DocumentNode.SelectSingleNode(xPathDescription);
+
+            if (descriptionNode != null)
+            {
+                var description = descriptionNode.InnerText;
+
+                if (!string.IsNullOrWhiteSpace(description))
+                {
+                    description = description.Trim();
+                }
+
+                return description;
+            }
+
             return string.Empty;
         }
 
         private bool GetIsCompleted()
-        {            
-            string 
+        {
+            string
                 XpathStatusInCountry = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[13]/b",
                 XpathStatusInCountryComplete = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[14]";
 
@@ -160,7 +198,7 @@ namespace MangaUpdatesCheck
 
         private bool GetIsFullyScanlated()
         {
-            string 
+            string
                 XpathScanlationStatus = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[15]/b",
                 XpathCompletelyScanlated = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[16]";
 

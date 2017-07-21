@@ -103,9 +103,7 @@ namespace MangaUpdatesCheck
             return parsedContent;
 
         }
-
-
-
+        
         public ISeriesData FetchSeriesData(string series)
         {
             throw new NotImplementedException();

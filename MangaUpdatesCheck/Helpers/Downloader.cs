@@ -57,6 +57,8 @@ namespace MangaUpdatesCheck.Helpers
                     }
                                         
                     response = _webClient.UploadValues(uri, parameters);
+
+                    break;
                 }
                 catch (WebException)
                 {
@@ -83,6 +85,8 @@ namespace MangaUpdatesCheck.Helpers
                     }
 
                     downloadedString = _webClient.DownloadString(uri);
+
+                    break;
                 }
                 catch (WebException)
                 {

@@ -16,8 +16,14 @@ namespace MangaUpdatesCheck_Tests
         public void Search_Test()
         {
             MangaUpdatesSearch series = new MangaUpdatesSearch();
-            var item = series.Search("Itoshi no Kana");
-            Console.WriteLine("Is fully scanlated: {0}", item.IsFullyScanlated);
+            Downloader.Instance.UserAgent = "MUC-R";
+
+            var item = series.Search("Houkago Play");
+
+            Console.WriteLine("Title: {0}", item.Title);
+            Console.WriteLine("---------------");
+            Console.WriteLine("Description: {0}", item.Description);
+            Console.WriteLine("Is completed: {0} | Is fully scanlated: {1}", item.IsCompleted, item.IsFullyScanlated);
         }
 
         [TestMethod]

@@ -9,7 +9,7 @@ namespace MangaUpdatesCheck
     public interface ISeriesData
     {
         string Title { get; }
-        string Description { get; set; }
+        string Description { get; }
         bool IsCompleted { get; }
         bool IsFullyScanlated { get; }
         bool IsLicensed { get; set; }
