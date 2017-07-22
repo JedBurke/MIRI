@@ -51,6 +51,7 @@ namespace MangaUpdatesCheck_Tests
         public void ParseDocument_Test()
         {
             var item = new SeriesData(Properties.Resources.Baka_Updates_Manga___Itoshi_no_Kana);
+
             Console.WriteLine("Year: {0}", item.Year);
             Console.WriteLine("Is fully scanlated: {0}", item.IsFullyScanlated);
             Console.WriteLine("Author Link: {0}", item.AuthorLink);

@@ -6,12 +6,34 @@ using System.Threading.Tasks;
 
 namespace MangaUpdatesCheck
 {
+    /// <summary>
+    /// Represents properties used to display information about series found on Manga-Updates.
+    /// </summary>
     public interface ISeriesData
     {
+        /// <summary>
+        /// Gets the series title.
+        /// </summary>
         string Title { get; }
+
+        /// <summary>
+        /// Gets the series description.
+        /// </summary>
         string Description { get; }
+
+        /// <summary>
+        /// Gets whether the series has been completed its original country.
+        /// </summary>
         bool IsCompleted { get; }
+
+        /// <summary>
+        /// Gets whether the series has been fully scanlated.
+        /// </summary>
         bool IsFullyScanlated { get; }
+
+        /// <summary>
+        /// Gets whether the series has been licensed in English.
+        /// </summary>
         bool IsLicensed { get; }
 
         /// <summary>
@@ -29,6 +51,9 @@ namespace MangaUpdatesCheck
         /// </summary>
         string Publisher { get; }
         
+        /// <summary>
+        /// Gets the type of series. (i.e Manga or Novel)
+        /// </summary>
         string SeriesType { get; }
 
         /// <summary>

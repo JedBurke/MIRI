@@ -59,6 +59,9 @@ namespace MangaUpdatesCheck
             }
         }
 
+        /// <summary>
+        /// Gets the series title.
+        /// </summary>
         public string Title
         {
             get
@@ -73,6 +76,9 @@ namespace MangaUpdatesCheck
             }
         }
 
+        /// <summary>
+        /// Gets the series description1.
+        /// </summary>
         public string Description
         {
             get
@@ -86,6 +92,9 @@ namespace MangaUpdatesCheck
             }
         }
 
+        /// <summary>
+        /// Gets whether the series has been completed in its origin country.
+        /// </summary>
         public bool IsCompleted
         {
             get
@@ -99,6 +108,9 @@ namespace MangaUpdatesCheck
             }
         }
 
+        /// <summary>
+        /// Gets whether the series has been fully scanlated.
+        /// </summary>
         public bool IsFullyScanlated
         {
             get
@@ -112,18 +124,27 @@ namespace MangaUpdatesCheck
             }
         }
 
+        /// <summary>
+        /// Gets whether the series has been licensed in English.
+        /// </summary>
         public bool IsLicensed
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets the name of the series' author.
+        /// </summary>
         public string Author
         {
             get;
             set;
         }
 
+        /// <summary>
+        /// Gets the name of the series' illustrator or artist.
+        /// </summary>
         public string Illustrator
         {
             get;
