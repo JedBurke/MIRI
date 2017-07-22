@@ -16,7 +16,14 @@ namespace MangaUpdatesCheck
 
         string Author { get; }
         string Illustrator { get; }
+        string Publisher { get; }
         string SeriesType { get; }
+
+        double Year { get; }
+        
+        Uri AuthorLink { get; }
+        Uri IllustratorLink { get; }
+        Uri PublisherLink { get; }
 
     }
 }
