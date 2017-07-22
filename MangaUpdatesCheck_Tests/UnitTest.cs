@@ -50,10 +50,12 @@ namespace MangaUpdatesCheck_Tests
         [TestMethod]
         public void ParseDocument_Test()
         {
-            // Todo: Deprecate 'SeriesDataParser.Parse()' in favor of lazy parsing.
-            //var item = SeriesDataParser.Parse(Properties.Resources.Baka_Updates_Manga___Itoshi_no_Kana);
             var item = new SeriesData(Properties.Resources.Baka_Updates_Manga___Itoshi_no_Kana);
+            Console.WriteLine("Year: {0}", item.Year);
             Console.WriteLine("Is fully scanlated: {0}", item.IsFullyScanlated);
+            Console.WriteLine("Author Link: {0}", item.AuthorLink);
+            Console.WriteLine("Illustrator Link: {0}", item.IllustratorLink);
+            Console.WriteLine("Publisher: {0} - {1}", item.Publisher, item.PublisherLink);
         }
 
         [TestMethod]

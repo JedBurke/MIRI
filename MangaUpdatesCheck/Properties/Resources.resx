@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ScrapeAuthorHeader" xml:space="preserve">
+    <value>Author(s)</value>
+  </data>
+  <data name="ScrapeIllustratorHeader" xml:space="preserve">
+    <value>Artist(s)</value>
+  </data>
+  <data name="ScrapePublisherHeader" xml:space="preserve">
+    <value>Original Publisher</value>
+  </data>
   <data name="ScrapeScanlatedConfirmText" xml:space="preserve">
     <value>Yes</value>
   </data>
@@ -131,6 +140,9 @@
   </data>
   <data name="ScrapeTypeText" xml:space="preserve">
     <value>Type</value>
+  </data>
+  <data name="ScrapeYearText" xml:space="preserve">
+    <value>Year</value>
   </data>
   <data name="SeriesSearchUri" xml:space="preserve">
     <value>https://www.mangaupdates.com/series.html</value>

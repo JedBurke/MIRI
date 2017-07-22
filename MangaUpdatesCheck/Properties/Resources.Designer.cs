@@ -61,6 +61,33 @@ namespace MangaUpdatesCheck.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Author(s).
+        /// </summary>
+        internal static string ScrapeAuthorHeader {
+            get {
+                return ResourceManager.GetString("ScrapeAuthorHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Artist(s).
+        /// </summary>
+        internal static string ScrapeIllustratorHeader {
+            get {
+                return ResourceManager.GetString("ScrapeIllustratorHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Original Publisher.
+        /// </summary>
+        internal static string ScrapePublisherHeader {
+            get {
+                return ResourceManager.GetString("ScrapePublisherHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
         internal static string ScrapeScanlatedConfirmText {
@@ -102,6 +129,15 @@ namespace MangaUpdatesCheck.Properties {
         internal static string ScrapeTypeText {
             get {
                 return ResourceManager.GetString("ScrapeTypeText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        internal static string ScrapeYearText {
+            get {
+                return ResourceManager.GetString("ScrapeYearText", resourceCulture);
             }
         }
         
