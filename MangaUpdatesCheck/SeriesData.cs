@@ -25,44 +25,107 @@ namespace MangaUpdatesCheck
         public static readonly SeriesData Empty = null;
 
         /// <summary>
-        /// Gets whether lazy parsing is enabled.
+        /// Gets whether lazy parsing is enabled for the series properties.
         /// </summary>
-        private readonly bool LazyParsing;
+        public bool LazyParsing
+        {
+            get
+            {
+                return _lazyParsing;
+            }
+        }
 
+        /// <summary>
+        /// The backing-field for the LazyParsing property.
+        /// </summary>
+        /// See <see cref="LazyParsing"/>.
+        private readonly bool _lazyParsing;
+
+        [Obsolete("Consider removing in favor of ParsedDocumentRootNode.")]
         private HtmlDocument ParsedDocument;
+
+        /// <summary>
+        /// Gets the root node of the parsed document as per the document content.
+        /// </summary>
         private HtmlNode ParsedDocumentRootNode;
 
-        private RegexOptions regexOptions = RegexOptions.IgnoreCase | RegexOptions.Compiled;
+        /// <summary>
+        /// The default regular expression options used to compare scrapped values against the expected values.
+        /// </summary>
+        private readonly RegexOptions regexOptions = RegexOptions.IgnoreCase | RegexOptions.Compiled;
         
         private string _documentContent = string.Empty;
 
         /// <summary>
-        /// The backing-store for the <c>Title</c> property.
+        /// The backing-field for the Title property.
         /// </summary>
         /// See <see cref="Title"/>.
         private string _title = string.Empty;
 
         /// <summary>
-        /// The backing store for the <c>Description</c> property.
+        /// The backing-field for the Description property.
         /// </summary>
         /// See <see cref="Description"/>.
         private string _description = string.Empty;
 
         /// <summary>
-        /// The backing store for the <c>IsCompleted</c> property.
+        /// The backing-field for the IsCompleted property.
         /// </summary>
-        /// See <see cref="IsCompleted"/>
+        /// See <see cref="IsCompleted"/>.
         private bool? _isCompleted;
+
+        /// <summary>
+        /// The backing-field for the IsFullyScanlated property.
+        /// </summary>
+        /// See <see cref="IsFullyScanlated"/>.
         private bool? _isFullyScanlated;
+
+        /// <summary>
+        /// The backing-field for the SeriesType property.
+        /// </summary>
+        /// See <see cref="SeriesType"/>.
         private string _seriesType = string.Empty;
 
+        /// <summary>
+        /// The backing-field for the Author property.
+        /// </summary>
+        /// See <see cref="Author"/>.
         private string _author = string.Empty;
+
+        /// <summary>
+        /// The backing-field for the Illustrator property.
+        /// </summary>
+        /// See <see cref="Illustrator"/>.
         private string _illustrator = string.Empty;
+
+        /// <summary>
+        /// The backing-field for the Publisher property.
+        /// </summary>
+        /// See <see cref="Publisher"/>.
         private string _publisher = string.Empty;
+
+        /// <summary>
+        /// The backing-field for the Year property.
+        /// </summary>
+        /// See <see cref="Year"/>.
         private double _year = -1;
 
+        /// <summary>
+        /// The backing-field for the AuthorLink property.
+        /// </summary>
+        /// See <see cref="AuthorLink"/>.
         private Uri _authorLink = null;
+
+        /// <summary>
+        /// The backing-field for the IllustratorLink property.
+        /// </summary>
+        /// See <see cref="IllustratorLink"/>.
         private Uri _illustratorLink = null;
+
+        /// <summary>
+        /// The backing-field for the PublisherLink property.
+        /// </summary>
+        /// See <see cref="PublisherLink"/>.
         private Uri _publisherLink = null;
 
         /// <summary>
@@ -88,15 +151,14 @@ namespace MangaUpdatesCheck
         /// <param name="documentContent">The HTML document of the series page to be parsed.</param>
         /// <param name="lazyParsing">Sets whether to parse all properties upon initialization.</param>
         public SeriesData(string documentContent, bool lazyParsing)
-        {
-            
+        {            
             // Parse content.
             this._documentContent = documentContent;
-            this.LazyParsing = lazyParsing;
+            this._lazyParsing = lazyParsing;
             
             if (!string.IsNullOrWhiteSpace(documentContent))
             {
-                Parse(this._documentContent);
+                Parse(this._documentContent, LazyParsing);
             }
         }
 
@@ -503,7 +565,12 @@ namespace MangaUpdatesCheck
             return value != null ? new Uri(value) : null;
         }
         
-        private void Parse(string documentContent)
+        /// <summary>
+        /// Parses the document content as an HtmlDocument object and scrapes the values from it.
+        /// </summary>
+        /// <param name="documentContent">The string representation of the content which is to be parsed.</param>
+        /// <param name="lazyParsing">Lazily parses the properties.</param>
+        private void Parse(string documentContent, bool lazyParsing)
         {
             if (string.IsNullOrEmpty(documentContent))
             {
@@ -515,7 +582,9 @@ namespace MangaUpdatesCheck
 
             ParsedDocumentRootNode = ParsedDocument.DocumentNode;
 
-            if (!LazyParsing)
+            /// Sets the backing fields of the respective properties if the lazy loading
+            /// option has been set to false.
+            if (!lazyParsing)
             {
                 this._title = GetTitle();
                 this._author = GetAuthor();
