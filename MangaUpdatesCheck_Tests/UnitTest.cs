@@ -24,7 +24,7 @@ namespace MangaUpdatesCheck_Tests
             Console.WriteLine("---------------");
             Console.WriteLine("Description: {0}", item.Description);
             Console.WriteLine("Series type: {0}", item.SeriesType);
-            Console.WriteLine("Is completed: {0} | Is fully scanlated: {1}", item.IsCompleted, item.IsFullyScanlated);
+            Console.WriteLine("Is completed? {0} | Is fully scanlated? {1}", Results.BoolToNaturalEnglish(item.IsCompleted), Results.BoolToNaturalEnglish(item.IsFullyScanlated));
         }
 
         [TestMethod]
@@ -57,7 +57,8 @@ namespace MangaUpdatesCheck_Tests
             Console.WriteLine("Illustrator: {0} - {1}", item.Illustrator, item.IllustratorLink);
             Console.WriteLine("Year: {0}", item.Year);
             Console.WriteLine("Publisher: {0} - {1}", item.Publisher, item.PublisherLink);
-            Console.WriteLine("Is fully scanlated: {0}", item.IsFullyScanlated ? "Yes" : "No");
+            Console.WriteLine("Is fully scanlated? {0}", Results.BoolToNaturalEnglish(item.IsFullyScanlated));
+            Console.WriteLine("Is completed in country of origin? {0}", Results.BoolToNaturalEnglish(item.IsCompleted));
         }
 
         [TestMethod]

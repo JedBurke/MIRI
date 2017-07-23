@@ -47,7 +47,7 @@ namespace MangaUpdatesCheck
         /// <summary>
         /// Gets the root node of the parsed document as per the document content.
         /// </summary>
-        private HtmlNode ParsedDocumentRootNode;
+        private readonly HtmlNode ParsedDocumentRootNode;
 
         /// <summary>
         /// The default regular expression options used to compare scrapped values against the expected values.
@@ -158,6 +158,11 @@ namespace MangaUpdatesCheck
             
             if (!string.IsNullOrWhiteSpace(documentContent))
             {
+                ParsedDocument = new HtmlDocument();
+                ParsedDocument.LoadHtml(documentContent);
+
+                ParsedDocumentRootNode = ParsedDocument.DocumentNode;
+
                 Parse(this._documentContent, LazyParsing);
             }
         }
@@ -577,10 +582,10 @@ namespace MangaUpdatesCheck
                 throw new ArgumentNullException();
             }
 
-            ParsedDocument = new HtmlDocument();
-            ParsedDocument.LoadHtml(documentContent);
+            //ParsedDocument = new HtmlDocument();
+            //ParsedDocument.LoadHtml(documentContent);
 
-            ParsedDocumentRootNode = ParsedDocument.DocumentNode;
+            //ParsedDocumentRootNode = ParsedDocument.DocumentNode;
 
             /// Sets the backing fields of the respective properties if the lazy loading
             /// option has been set to false.

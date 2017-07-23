@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace MangaUpdatesCheck.Helpers
 {
-    public class Search
+    /// <summary>
+    /// Represents a collection of methods used with preparing for a series search.
+    /// </summary>
+    public static class Search
     {
         /// <summary>
         /// Formats the parameter for use with POST or GET web requests.
@@ -34,4 +37,5 @@ namespace MangaUpdatesCheck.Helpers
         }
 
     }
+        
 }
