@@ -56,6 +56,8 @@ namespace MangaUpdatesCheck
         private bool? _isFullyScanlated;
         private string _seriesType = string.Empty;
 
+        private string _author = string.Empty;
+        private string _illustrator = string.Empty;
         private string _publisher = string.Empty;
         private double _year = -1;
 
@@ -172,15 +174,20 @@ namespace MangaUpdatesCheck
             set;
         }
 
-        // Todo: Implement Author and Illustrator properties.
-
         /// <summary>
         /// Gets the name of the series' author.
         /// </summary>
         public string Author
         {
-            get;
-            set;
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this._author))
+                {
+                    this._author = GetAuthor();
+                }
+
+                return this._author;
+            }
         }
 
         /// <summary>
@@ -188,8 +195,15 @@ namespace MangaUpdatesCheck
         /// </summary>
         public string Illustrator
         {
-            get;
-            set;
+            get
+            {
+                if (string.IsNullOrWhiteSpace(this._illustrator))
+                {
+                    this._illustrator = GetIllustrator();
+                }
+
+                return this._illustrator;
+            }
         }
 
         /// <summary>
@@ -206,7 +220,7 @@ namespace MangaUpdatesCheck
                 return _seriesType;
             }
         }
-
+        
         /// <summary>
         /// Gets the original publisher.
         /// </summary>
@@ -388,6 +402,26 @@ namespace MangaUpdatesCheck
             return string.Empty;
         }
 
+        private string GetAuthor()
+        {
+            string
+                xPathAuthorHeader = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[11]/b",
+                xPathAuthor = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[12]/a/u";
+
+            return ScrapeInformation(xPathAuthorHeader, xPathAuthor, Resources.ScrapeAuthorHeader);
+
+        }
+
+        private string GetIllustrator()
+        {
+            string
+                xPathIllustratorHeader = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[13]/b",
+                xPathIllustrator = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[14]/a/u";
+
+            return ScrapeInformation(xPathIllustratorHeader, xPathIllustrator, Resources.ScrapeIllustratorHeader);
+
+        }
+
         private string GetPublisher()
         {
             string
@@ -484,6 +518,8 @@ namespace MangaUpdatesCheck
             if (!LazyParsing)
             {
                 this._title = GetTitle();
+                this._author = GetAuthor();
+                this._illustrator = GetIllustrator();
                 this._isCompleted = GetIsCompleted();
                 this._isFullyScanlated = GetIsFullyScanlated();
                 this._description = GetDescription();
@@ -497,10 +533,12 @@ namespace MangaUpdatesCheck
             }
         }
 
+        // Todo: Employ inversion to avoid repeating buggy code.
+
         private string ScrapeInformation(string categoryXpath, string valueXpath, string expectedCategoryText)
         {
             var categoryNode = ParsedDocumentRootNode.SelectSingleNode(categoryXpath);
-            if (categoryNode != null && Regex.IsMatch(categoryNode.InnerText, expectedCategoryText, regexOptions))
+            if (categoryNode != null && Regex.IsMatch(categoryNode.InnerText, Regex.Escape(expectedCategoryText), regexOptions))
             {
                 var valueNode = ParsedDocumentRootNode.SelectSingleNode(valueXpath);
 
