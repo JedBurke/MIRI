@@ -9,11 +9,26 @@ using System.Threading.Tasks;
 
 namespace MangaUpdatesCheck
 {
+    /// <summary>
+    /// Represents an implementation for the ISeriesData interface employing XPath to scrape and display series data from Manga-Updates.
+    /// </summary>
     public class SeriesData : ISeriesData
     {
-        static readonly string ATTRIBUTE_HREF = "href";
+        /// <summary>
+        /// Gets the string representation of the HTML anchor's <c>Hyperlink</c> attribute.
+        /// </summary>
+        private static readonly string ATTRIBUTE_HREF = "href";
 
-        private bool LazyParsing;
+        /// <summary>
+        /// Represents a SeriesData object which contains no data.
+        /// </summary>
+        public static readonly SeriesData Empty = null;
+
+        /// <summary>
+        /// Gets whether lazy parsing is enabled.
+        /// </summary>
+        private readonly bool LazyParsing;
+
         private HtmlDocument ParsedDocument;
         private HtmlNode ParsedDocumentRootNode;
 
@@ -21,8 +36,22 @@ namespace MangaUpdatesCheck
         
         private string _documentContent = string.Empty;
 
+        /// <summary>
+        /// The backing-store for the <c>Title</c> property.
+        /// </summary>
+        /// See <see cref="Title"/>.
         private string _title = string.Empty;
+
+        /// <summary>
+        /// The backing store for the <c>Description</c> property.
+        /// </summary>
+        /// See <see cref="Description"/>.
         private string _description = string.Empty;
+
+        /// <summary>
+        /// The backing store for the <c>IsCompleted</c> property.
+        /// </summary>
+        /// See <see cref="IsCompleted"/>
         private bool? _isCompleted;
         private bool? _isFullyScanlated;
         private string _seriesType = string.Empty;
@@ -34,25 +63,35 @@ namespace MangaUpdatesCheck
         private Uri _illustratorLink = null;
         private Uri _publisherLink = null;
 
-
+        /// <summary>
+        /// Initializes a new instance of the SeriesData class which is empty.
+        /// </summary>
         public SeriesData()
             : this(string.Empty)
         {
         }
 
-        public SeriesData(string content)
-            : this(content, true)
+        /// <summary>
+        /// Initializes a new instance of the SeriesData class with the series page.
+        /// </summary>
+        /// <param name="documentContent">The HTML document of the series page to be parsed.</param>
+        public SeriesData(string documentContent)
+            : this(documentContent, true)
         {
         }
-
-        public static SeriesData Empty;
-
+        
+        /// <summary>
+        /// Initializes a new instance of the SeriesData class with the series page and whether to parse lazily.
+        /// </summary>
+        /// <param name="documentContent">The HTML document of the series page to be parsed.</param>
+        /// <param name="lazyParsing">Sets whether to parse all properties upon initialization.</param>
         public SeriesData(string documentContent, bool lazyParsing)
         {
+            
             // Parse content.
             this._documentContent = documentContent;
             this.LazyParsing = lazyParsing;
-
+            
             if (!string.IsNullOrWhiteSpace(documentContent))
             {
                 Parse(this._documentContent);
@@ -151,6 +190,9 @@ namespace MangaUpdatesCheck
             set;
         }
 
+        /// <summary>
+        /// Gets the type of series. (i.e Manga or Novel)
+        /// </summary>
         public string SeriesType
         {
             get {
@@ -163,6 +205,9 @@ namespace MangaUpdatesCheck
             }
         }
 
+        /// <summary>
+        /// Gets the original publisher.
+        /// </summary>
         public string Publisher
         {
             get {
@@ -175,6 +220,9 @@ namespace MangaUpdatesCheck
             }
         }
 
+        /// <summary>
+        /// Gets the year in which the series was originally published.
+        /// </summary>
         public double Year
         {
             get {
@@ -187,6 +235,9 @@ namespace MangaUpdatesCheck
             }
         }
 
+        /// <summary>
+        /// Gets the uri of the author's profile page.
+        /// </summary>
         public Uri AuthorLink
         {
             get {
@@ -198,7 +249,10 @@ namespace MangaUpdatesCheck
                 return this._authorLink;
             }
         }
-
+        
+        /// <summary>
+        /// Gets the uri of the illustrator's profile page.
+        /// </summary>
         public Uri IllustratorLink
         {
             get {
@@ -210,7 +264,10 @@ namespace MangaUpdatesCheck
                 return this._illustratorLink;
             }
         }
-
+        
+        /// <summary>
+        /// Gets the uri of the publisher's information page.
+        /// </summary>
         public Uri PublisherLink
         {
             get {
@@ -339,6 +396,10 @@ namespace MangaUpdatesCheck
 
         }
 
+        /// <summary>
+        /// Scrapes the year the series was originally published.
+        /// </summary>
+        /// <returns>The scrapped value as a double.</returns>
         private double GetYear()
         {
             double publishedYear = 0;
@@ -361,6 +422,10 @@ namespace MangaUpdatesCheck
             return publishedYear;
         }
 
+        /// <summary>
+        /// Scrapes the author's page link from the parsed document.
+        /// </summary>
+        /// <returns>The scraped value as a Uri object.</returns>
         private Uri GetAuthorLink()
         {
             string 
@@ -372,6 +437,10 @@ namespace MangaUpdatesCheck
             return value != null ? new Uri(value) : null;
         }
 
+        /// <summary>
+        /// Scrapes the illustrator's page link from the parsed document.
+        /// </summary>
+        /// <returns>The scrapped value as a Uri object.</returns>
         private Uri GetIllustratorLink()
         {
             string
@@ -383,6 +452,10 @@ namespace MangaUpdatesCheck
             return value != null ? new Uri(value) : null;
         }
 
+        /// <summary>
+        /// Scrapes the publisher link from the parsed document.
+        /// </summary>
+        /// <returns>The scrapped value as a Uri object.</returns>
         private Uri GetPublisherLink()
         {
             string
