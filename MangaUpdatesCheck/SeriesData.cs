@@ -172,6 +172,8 @@ namespace MangaUpdatesCheck
             set;
         }
 
+        // Todo: Implement Author and Illustrator properties.
+
         /// <summary>
         /// Gets the name of the series' author.
         /// </summary>

@@ -6,11 +6,14 @@ using System.Threading.Tasks;
 
 namespace MangaUpdatesCheck
 {
+    /// <summary>
+    /// The format in which the server should return the search results.
+    /// </summary>
     public enum SearchResultOutput : int
     {
         Json,
         JsonP,
-        Xml
+        Xml = 0
     }
 
 }

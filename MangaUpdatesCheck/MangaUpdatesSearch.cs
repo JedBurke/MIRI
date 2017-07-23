@@ -60,7 +60,7 @@ namespace MangaUpdatesCheck
                 // Todo: Check, probably not best practice to convert an enum to string like this.
                 param.Add("output", outputType.ToString().ToLower());
 
-                response = Helpers.Downloader.Instance.UploadValues(new Uri(Properties.Resources.SeriesSearchUri), param); //PostQuery(new Uri(Properties.Resources.SeriesSearchUri), param);
+                response = Helpers.Downloader.Instance.UploadValues(new Uri(Properties.Resources.SeriesSearchUri), param);
 
                 using (var serializeResults = new SerializeResults())
                 {
@@ -78,7 +78,7 @@ namespace MangaUpdatesCheck
                 response = null;
                 seriesSanitized = null;
 
-                // Todo: Dispose.
+                // Todo: Implement IDisposable and dispose.
                 results = null;
 
                 if (param != null)
