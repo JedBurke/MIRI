@@ -53,12 +53,16 @@ namespace MangaUpdatesCheck_Tests
             var item = new SeriesData(Properties.Resources.Baka_Updates_Manga___Itoshi_no_Kana);
 
             Console.WriteLine(item.Title);
+            Console.WriteLine(item.Description);
+            Console.WriteLine("-----");
             Console.WriteLine("Author: {0} - {1}", item.Author, item.AuthorLink);
             Console.WriteLine("Illustrator: {0} - {1}", item.Illustrator, item.IllustratorLink);
+            Console.WriteLine();
             Console.WriteLine("Year: {0}", item.Year);
             Console.WriteLine("Publisher: {0} - {1}", item.Publisher, item.PublisherLink);
             Console.WriteLine("Is fully scanlated? {0}", Results.BoolToNaturalEnglish(item.IsFullyScanlated));
             Console.WriteLine("Is completed in country of origin? {0}", Results.BoolToNaturalEnglish(item.IsCompleted));
+            Console.WriteLine("Series Type: {0}", item.SeriesType);
         }
 
         [TestMethod]

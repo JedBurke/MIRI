@@ -104,6 +104,8 @@ namespace MangaUpdatesCheck
 
         }
         
+        /// Todo: Move Search(string) code to 
+
         public ISeriesData FetchSeriesData(string series)
         {
             throw new NotImplementedException();

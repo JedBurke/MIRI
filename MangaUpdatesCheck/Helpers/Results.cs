@@ -16,7 +16,7 @@ namespace MangaUpdatesCheck.Helpers
         /// </summary>
         /// <param name="value">The boolean value to be converted.</param>
         /// <returns>A string representation of the natural english value.</returns>
-        /// See <see cref="BoolToNaturalEnglishLower"/> for a lower-case value.
+        /// See <see cref="BoolToNaturalEnglishLower(bool)"/> for a lower-case value.
         public static string BoolToNaturalEnglish(bool value)
         {
             return value ? "Yes" : "No";
@@ -27,10 +27,21 @@ namespace MangaUpdatesCheck.Helpers
         /// </summary>
         /// <param name="value">The boolean value to be converted.</param>
         /// <returns>A lower-case string representation of the natural english value.</returns>
-        /// See <see cref="BoolToNaturalEnglish"/> for a capitalized value.
+        /// See <see cref="BoolToNaturalEnglish(bool)"/> for a capitalized value.
         public static string BoolToNaturalEnglishLower(bool value)
         {
             return BoolToNaturalEnglish(value).ToLower();
+        }
+
+        /// <summary>
+        /// Formats the properties of SeriesData object in a generic manner.
+        /// </summary>
+        /// <param name="data">The series information to be formatted.</param>
+        /// <returns>A string of the formatted series information. </returns>
+        public static string PrintSeriesData(ISeriesData data)
+        {
+            // Todo: Implement.
+            throw new NotImplementedException();
         }
 
     }

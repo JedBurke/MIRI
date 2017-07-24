@@ -53,7 +53,7 @@ namespace MangaUpdatesCheck
         /// The default regular expression options used to compare scrapped values against the expected values.
         /// </summary>
         private readonly RegexOptions regexOptions = RegexOptions.IgnoreCase | RegexOptions.Compiled;
-        
+
         private string _documentContent = string.Empty;
 
         /// <summary>
@@ -144,18 +144,18 @@ namespace MangaUpdatesCheck
             : this(documentContent, true)
         {
         }
-        
+
         /// <summary>
         /// Initializes a new instance of the SeriesData class with the series page and whether to parse lazily.
         /// </summary>
         /// <param name="documentContent">The HTML document of the series page to be parsed.</param>
         /// <param name="lazyParsing">Sets whether to parse all properties upon initialization.</param>
         public SeriesData(string documentContent, bool lazyParsing)
-        {            
+        {
             // Parse content.
             this._documentContent = documentContent;
             this._lazyParsing = lazyParsing;
-            
+
             if (!string.IsNullOrWhiteSpace(documentContent))
             {
                 ParsedDocument = new HtmlDocument();
@@ -278,7 +278,8 @@ namespace MangaUpdatesCheck
         /// </summary>
         public string SeriesType
         {
-            get {
+            get
+            {
                 if (string.IsNullOrEmpty(_seriesType))
                 {
                     _seriesType = GetSeriesType();
@@ -287,13 +288,14 @@ namespace MangaUpdatesCheck
                 return _seriesType;
             }
         }
-        
+
         /// <summary>
         /// Gets the original publisher.
         /// </summary>
         public string Publisher
         {
-            get {
+            get
+            {
                 if (string.IsNullOrWhiteSpace(this._publisher))
                 {
                     this._publisher = GetPublisher();
@@ -308,7 +310,8 @@ namespace MangaUpdatesCheck
         /// </summary>
         public double Year
         {
-            get {
+            get
+            {
                 if (this._year == -1)
                 {
                     this._year = GetYear();
@@ -323,7 +326,8 @@ namespace MangaUpdatesCheck
         /// </summary>
         public Uri AuthorLink
         {
-            get {
+            get
+            {
                 if (this._authorLink == null)
                 {
                     this._authorLink = GetAuthorLink();
@@ -332,13 +336,14 @@ namespace MangaUpdatesCheck
                 return this._authorLink;
             }
         }
-        
+
         /// <summary>
         /// Gets the uri of the illustrator's profile page.
         /// </summary>
         public Uri IllustratorLink
         {
-            get {
+            get
+            {
                 if (this._illustratorLink == null)
                 {
                     this._illustratorLink = GetIllustratorLink();
@@ -347,13 +352,14 @@ namespace MangaUpdatesCheck
                 return this._illustratorLink;
             }
         }
-        
+
         /// <summary>
         /// Gets the uri of the publisher's information page.
         /// </summary>
         public Uri PublisherLink
         {
-            get {
+            get
+            {
                 if (this._publisherLink == null)
                 {
                     this._publisherLink = GetPublisherLink();
@@ -366,41 +372,19 @@ namespace MangaUpdatesCheck
         private string GetTitle()
         {
             var xPathTitle = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[1]/span[1]";
-            var titleNode = ParsedDocument.DocumentNode.SelectSingleNode(xPathTitle);
+            return ScrapeInformationWithoutHeader(xPathTitle);
 
-            if (titleNode != null)
-            {
-                var title = titleNode.InnerText;
-
-                if (!string.IsNullOrWhiteSpace(title))
-                {
-                    title = title.Trim();
-                }
-
-                return title;
-            }
-
-            return string.Empty;
         }
 
         private string GetDescription()
         {
             var xPathDescription = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[2]";
-            var descriptionNode = ParsedDocument.DocumentNode.SelectSingleNode(xPathDescription);
+            string value = ScrapeInformationWithoutHeader(xPathDescription);
 
-            if (descriptionNode != null)
-            {
-                var description = descriptionNode.InnerText;
+            value = System.Net.WebUtility.HtmlDecode(value);
+            value = Regex.Replace(value, "<!--(.[^(-->)]*)-->", "", regexOptions);
 
-                if (!string.IsNullOrWhiteSpace(description))
-                {
-                    description = description.Trim();
-                }
-
-                return description;
-            }
-
-            return string.Empty;
+            return value;
         }
 
         private bool GetIsCompleted()
@@ -409,21 +393,15 @@ namespace MangaUpdatesCheck
                 XpathStatusInCountry = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[13]/b",
                 XpathStatusInCountryComplete = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[14]";
 
-            /// Check the series' status in its country.
-            var country = ParsedDocument.DocumentNode.SelectSingleNode(XpathStatusInCountry);
+            string status = ScrapeInformation(XpathStatusInCountry, XpathStatusInCountryComplete, Resources.ScrapeStatusInCountry);
+            bool value = false;
 
-            if (country != null && Regex.IsMatch(country.InnerText, Resources.ScrapeStatusInCountry, regexOptions))
+            if (!string.IsNullOrWhiteSpace(status))
             {
-                // If the node has been found, check if it is complete.
-                var status = ParsedDocument.DocumentNode.SelectSingleNode(XpathStatusInCountryComplete);
-
-                if (status != null)
-                {
-                    return Regex.IsMatch(status.InnerText, Resources.ScrapeStatusInCountryComplete, regexOptions);
-                }
+                value = Regex.IsMatch(status, Resources.ScrapeStatusInCountryComplete, regexOptions);
             }
 
-            return false;
+            return value;
         }
 
         private bool GetIsFullyScanlated()
@@ -432,20 +410,30 @@ namespace MangaUpdatesCheck
                 XpathScanlationStatus = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[15]/b",
                 XpathCompletelyScanlated = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[16]";
 
-            // Check the scanlation status of the series.
-            var scanlated = ParsedDocument.DocumentNode.SelectSingleNode(XpathScanlationStatus);
+            string status = ScrapeInformation(XpathScanlationStatus, XpathCompletelyScanlated, Resources.ScrapeScanlatedText);
+            bool value = false;
 
-            if (scanlated != null && Regex.IsMatch(scanlated.InnerText, Resources.ScrapeScanlatedText, regexOptions))
+            // Todo: Move to ScrapeInformation.
+
+            if (!string.IsNullOrWhiteSpace(status))
             {
-                var status = ParsedDocument.DocumentNode.SelectSingleNode(XpathCompletelyScanlated);
-
-                if (status != null)
-                {
-                    return Regex.IsMatch(status.InnerText, Resources.ScrapeScanlatedConfirmText, regexOptions);
-                }
+                value = Regex.IsMatch(status, Resources.ScrapeScanlatedConfirmText, regexOptions);
             }
 
-            return false;
+            //// Check the scanlation status of the series.
+            //var scanlated = ParsedDocument.DocumentNode.SelectSingleNode(XpathScanlationStatus);
+
+            //if (scanlated != null && Regex.IsMatch(scanlated.InnerText, Resources.ScrapeScanlatedText, regexOptions))
+            //{
+            //    var status = ParsedDocument.DocumentNode.SelectSingleNode(XpathCompletelyScanlated);
+
+            //    if (status != null)
+            //    {
+            //        return Regex.IsMatch(status.InnerText, Resources.ScrapeScanlatedConfirmText, regexOptions);
+            //    }
+            //}
+
+            return value;
         }
 
         private string GetSeriesType()
@@ -454,19 +442,7 @@ namespace MangaUpdatesCheck
                 xPathTypeCategory = "/html/body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[3]/b",
                 xPathType = "//body/div/table/tr[3]/td/table//td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[4]";
 
-            var typeCategoryNode = ParsedDocument.DocumentNode.SelectSingleNode(xPathTypeCategory);
-
-            if (typeCategoryNode != null && Regex.IsMatch(typeCategoryNode.InnerText, Resources.ScrapeTypeText, regexOptions))
-            {
-                var typeNode = ParsedDocument.DocumentNode.SelectSingleNode(xPathType);
-
-                if (typeNode != null && !string.IsNullOrWhiteSpace(typeNode.InnerText))
-                {
-                    return typeNode.InnerText.Trim();
-                }
-            }
-            
-            return string.Empty;
+            return ScrapeInformation(xPathTypeCategory, xPathType, Resources.ScrapeTypeText);
         }
 
         private string GetAuthor()
@@ -507,7 +483,7 @@ namespace MangaUpdatesCheck
         {
             double publishedYear = 0;
 
-            string 
+            string
                 xPathYearCategory = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[15]/b",
                 xPathYear = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[16]";
 
@@ -531,12 +507,12 @@ namespace MangaUpdatesCheck
         /// <returns>The scraped value as a Uri object.</returns>
         private Uri GetAuthorLink()
         {
-            string 
+            string
                 xPathAuthorHeader = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[11]/b",
                 xPathAuthor = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[12]/a";
 
             string value = ScrapeAttributeInformation(xPathAuthorHeader, xPathAuthor, Resources.ScrapeAuthorHeader, ATTRIBUTE_HREF);
-            
+
             return value != null ? new Uri(value) : null;
         }
 
@@ -569,7 +545,7 @@ namespace MangaUpdatesCheck
 
             return value != null ? new Uri(value) : null;
         }
-        
+
         /// <summary>
         /// Parses the document content as an HtmlDocument object and scrapes the values from it.
         /// </summary>
@@ -609,12 +585,31 @@ namespace MangaUpdatesCheck
 
         // Todo: Employ inversion to avoid repeating buggy code.
 
+        private string ScrapeInformationWithoutHeader(string valueXpath)
+        {
+            return ScrapeInformation(string.Empty, valueXpath, string.Empty);
+        }
+
         private string ScrapeInformation(string categoryXpath, string valueXpath, string expectedCategoryText)
         {
-            var categoryNode = ParsedDocumentRootNode.SelectSingleNode(categoryXpath);
-            if (categoryNode != null && Regex.IsMatch(categoryNode.InnerText, Regex.Escape(expectedCategoryText), regexOptions))
+            if (!string.IsNullOrWhiteSpace(valueXpath))
             {
+                if (!string.IsNullOrWhiteSpace(categoryXpath))
+                {
+                    var categoryNode = ParsedDocumentRootNode.SelectSingleNode(categoryXpath);
+                    if (categoryNode == null || !Regex.IsMatch(categoryNode.InnerText, Regex.Escape(expectedCategoryText), regexOptions))
+                    {
+                        return string.Empty;
+                    }
+                }
+
                 var valueNode = ParsedDocumentRootNode.SelectSingleNode(valueXpath);
+
+                /// Todo: Consider placing in an optional 'pre-parsing' method.
+                var content = valueNode.InnerHtml;
+                content = Regex.Replace(content, "<br>|<br/>|<br></br>", Environment.NewLine, regexOptions);
+
+                valueNode.InnerHtml = content;
 
                 if (valueNode != null && !string.IsNullOrWhiteSpace(valueNode.InnerText))
                 {
@@ -624,6 +619,7 @@ namespace MangaUpdatesCheck
                     return value;
                 }
             }
+
 
             return string.Empty;
         }
