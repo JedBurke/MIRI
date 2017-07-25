@@ -381,6 +381,10 @@ namespace MangaUpdatesCheck
             }
         }
 
+        /// <summary>
+        /// Scrapes the series' title.
+        /// </summary>
+        /// <returns>The series' title as a string.</returns>
         private string GetTitle()
         {
             var xPathTitle = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[1]/span[1]";
@@ -388,6 +392,10 @@ namespace MangaUpdatesCheck
 
         }
 
+        /// <summary>
+        /// Scrapes the serie's description.
+        /// </summary>
+        /// <returns>the series' description as a string.</returns>
         private string GetDescription()
         {
             var xPathDescription = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[2]";
@@ -399,6 +407,10 @@ namespace MangaUpdatesCheck
             return value;
         }
 
+        /// <summary>
+        /// Scrapes completion status of the series.
+        /// </summary>
+        /// <returns>A boolean value of whether the series has been completed.</returns>
         private bool GetIsCompleted()
         {
             string
@@ -416,6 +428,10 @@ namespace MangaUpdatesCheck
             return ScrapeAndCompareInformation(XpathStatusInCountry, XpathStatusInCountryComplete, Resources.ScrapeStatusInCountry, Resources.ScrapeStatusInCountryComplete);
         }
 
+        /// <summary>
+        /// Scrapes the scanlation status of the series.
+        /// </summary>
+        /// <returns>A boolean value of whether the series has been fully scanlated.</returns>
         private bool GetIsFullyScanlated()
         {
             string
@@ -448,6 +464,10 @@ namespace MangaUpdatesCheck
             return value;
         }
 
+        /// <summary>
+        /// Scrapes the series type from the parsed document.
+        /// </summary>
+        /// <returns>A string representation of the series' type.</returns>
         private string GetSeriesType()
         {
             string
@@ -457,6 +477,10 @@ namespace MangaUpdatesCheck
             return ScrapeInformation(xPathTypeCategory, xPathType, Resources.ScrapeTypeText);
         }
 
+        /// <summary>
+        /// Scrapes the author of the series.
+        /// </summary>
+        /// <returns>The series' author.</returns>
         private string GetAuthor()
         {
             string
@@ -467,6 +491,10 @@ namespace MangaUpdatesCheck
 
         }
 
+        /// <summary>
+        /// Scrapes the illustrator of the series.
+        /// </summary>
+        /// <returns>The series' illustrator or artist.</returns>
         private string GetIllustrator()
         {
             string
@@ -477,6 +505,10 @@ namespace MangaUpdatesCheck
 
         }
 
+        /// <summary>
+        /// Scrapes the original publisher of the series.
+        /// </summary>
+        /// <returns>The original publisher.</returns>
         private string GetPublisher()
         {
             string
@@ -487,6 +519,10 @@ namespace MangaUpdatesCheck
 
         }
 
+        /// <summary>
+        /// Scrapes the value whether the series has been licensed in English. 
+        /// </summary>
+        /// <returns>A boolean of whether the series has been licensed.</returns>
         private bool GetIsLicensed()
         {
             string
