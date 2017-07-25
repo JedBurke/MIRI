@@ -120,14 +120,17 @@
   <data name="ScrapeAuthorHeader" xml:space="preserve">
     <value>Author(s)</value>
   </data>
+  <data name="ScrapeConfirmationText" xml:space="preserve">
+    <value>Yes</value>
+  </data>
   <data name="ScrapeIllustratorHeader" xml:space="preserve">
     <value>Artist(s)</value>
   </data>
+  <data name="ScrapeLicensedEnglishHeader" xml:space="preserve">
+    <value>Licensed (in English)</value>
+  </data>
   <data name="ScrapePublisherHeader" xml:space="preserve">
     <value>Original Publisher</value>
-  </data>
-  <data name="ScrapeScanlatedConfirmText" xml:space="preserve">
-    <value>Yes</value>
   </data>
   <data name="ScrapeScanlatedText" xml:space="preserve">
     <value>Completely Scanlated</value>
@@ -146,6 +149,12 @@
   </data>
   <data name="SeriesSearchUri" xml:space="preserve">
     <value>https://www.mangaupdates.com/series.html</value>
+  </data>
+  <data name="SeriesTypeManga" xml:space="preserve">
+    <value>Manga</value>
+  </data>
+  <data name="SeriesTypeNovel" xml:space="preserve">
+    <value>Novel</value>
   </data>
   <data name="SeriesUriFormat" xml:space="preserve">
     <value>https://www.mangaupdates.com/series.html?id={0}</value>

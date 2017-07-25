@@ -44,5 +44,15 @@ namespace MangaUpdatesCheck.Helpers
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Gets the string representation of the type of series defined in the ISeriesData object.
+        /// </summary>
+        /// <param name="data">The object from which the series type is to be obtained.</param>
+        /// <returns></returns>
+        public static string GetSeriesTypeAsString(ISeriesData data)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

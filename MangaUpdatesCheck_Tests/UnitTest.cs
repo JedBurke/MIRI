@@ -62,7 +62,14 @@ namespace MangaUpdatesCheck_Tests
             Console.WriteLine("Publisher: {0} - {1}", item.Publisher, item.PublisherLink);
             Console.WriteLine("Is fully scanlated? {0}", Results.BoolToNaturalEnglish(item.IsFullyScanlated));
             Console.WriteLine("Is completed in country of origin? {0}", Results.BoolToNaturalEnglish(item.IsCompleted));
+            Console.WriteLine("Is licensed in English: {0}", item.IsLicensed);
             Console.WriteLine("Series Type: {0}", item.SeriesType);
+
+
+            Assert.AreEqual(2006, item.Year);
+            Assert.IsFalse(item.IsLicensed);
+            Assert.IsTrue(item.IsFullyScanlated);
+            Assert.IsTrue(item.IsCompleted);
         }
 
         [TestMethod]

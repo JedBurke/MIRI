@@ -70,6 +70,15 @@ namespace MangaUpdatesCheck.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string ScrapeConfirmationText {
+            get {
+                return ResourceManager.GetString("ScrapeConfirmationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Artist(s).
         /// </summary>
         internal static string ScrapeIllustratorHeader {
@@ -79,20 +88,20 @@ namespace MangaUpdatesCheck.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Licensed (in English).
+        /// </summary>
+        internal static string ScrapeLicensedEnglishHeader {
+            get {
+                return ResourceManager.GetString("ScrapeLicensedEnglishHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Original Publisher.
         /// </summary>
         internal static string ScrapePublisherHeader {
             get {
                 return ResourceManager.GetString("ScrapePublisherHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Yes.
-        /// </summary>
-        internal static string ScrapeScanlatedConfirmText {
-            get {
-                return ResourceManager.GetString("ScrapeScanlatedConfirmText", resourceCulture);
             }
         }
         
@@ -147,6 +156,24 @@ namespace MangaUpdatesCheck.Properties {
         internal static string SeriesSearchUri {
             get {
                 return ResourceManager.GetString("SeriesSearchUri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manga.
+        /// </summary>
+        internal static string SeriesTypeManga {
+            get {
+                return ResourceManager.GetString("SeriesTypeManga", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Novel.
+        /// </summary>
+        internal static string SeriesTypeNovel {
+            get {
+                return ResourceManager.GetString("SeriesTypeNovel", resourceCulture);
             }
         }
         

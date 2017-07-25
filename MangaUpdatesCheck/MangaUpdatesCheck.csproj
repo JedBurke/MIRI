@@ -64,6 +64,7 @@
     <Compile Include="Serialization\Results.cs" />
     <Compile Include="SerializeResults.cs" />
     <Compile Include="SeriesData.cs" />
+    <Compile Include="SeriesType.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">

@@ -81,6 +81,11 @@ namespace MangaUpdatesCheck
         private bool? _isFullyScanlated;
 
         /// <summary>
+        /// The backing-store for the IsLicensed property.
+        /// </summary>
+        private bool? _isLicensed;
+
+        /// <summary>
         /// The backing-field for the SeriesType property.
         /// </summary>
         /// See <see cref="SeriesType"/>.
@@ -237,8 +242,15 @@ namespace MangaUpdatesCheck
         /// </summary>
         public bool IsLicensed
         {
-            get;
-            set;
+            get
+            {
+                if (this._isLicensed == null)
+                {
+                    this._isLicensed = GetIsLicensed();
+                }
+
+                return this._isLicensed.Value;
+            }
         }
 
         /// <summary>
@@ -393,15 +405,15 @@ namespace MangaUpdatesCheck
                 XpathStatusInCountry = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[13]/b",
                 XpathStatusInCountryComplete = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[3]/div/div[14]";
 
-            string status = ScrapeInformation(XpathStatusInCountry, XpathStatusInCountryComplete, Resources.ScrapeStatusInCountry);
-            bool value = false;
+            //string status = ScrapeInformation(XpathStatusInCountry, XpathStatusInCountryComplete, Resources.ScrapeStatusInCountry);
+            //bool value = false;
 
-            if (!string.IsNullOrWhiteSpace(status))
-            {
-                value = Regex.IsMatch(status, Resources.ScrapeStatusInCountryComplete, regexOptions);
-            }
+            //if (!string.IsNullOrWhiteSpace(status))
+            //{
+            //    value = Regex.IsMatch(status, Resources.ScrapeStatusInCountryComplete, regexOptions);
+            //}
 
-            return value;
+            return ScrapeAndCompareInformation(XpathStatusInCountry, XpathStatusInCountryComplete, Resources.ScrapeStatusInCountry, Resources.ScrapeStatusInCountryComplete);
         }
 
         private bool GetIsFullyScanlated()
@@ -417,7 +429,7 @@ namespace MangaUpdatesCheck
 
             if (!string.IsNullOrWhiteSpace(status))
             {
-                value = Regex.IsMatch(status, Resources.ScrapeScanlatedConfirmText, regexOptions);
+                value = Regex.IsMatch(status, Resources.ScrapeConfirmationText, regexOptions);
             }
 
             //// Check the scanlation status of the series.
@@ -472,6 +484,16 @@ namespace MangaUpdatesCheck
                 xPathPublisher = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[18]/a/u";
 
             return ScrapeInformation(xPathPublisherCategory, xPathPublisher, Resources.ScrapePublisherHeader);
+
+        }
+
+        private bool GetIsLicensed()
+        {
+            string
+                xPathCategory = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[21]/b",
+                xPathValue = "//body/div/table/tr[3]/td/table/tr/td[2]/table/tr[2]/td/table[2]/tr/td/div[1]/div[4]/div/div[22]";
+
+            return ScrapeAndCompareInformation(xPathCategory, xPathValue, Resources.ScrapeLicensedEnglishHeader, Resources.ScrapeConfirmationText);
 
         }
 
@@ -585,11 +607,23 @@ namespace MangaUpdatesCheck
 
         // Todo: Employ inversion to avoid repeating buggy code.
 
+        /// <summary>
+        /// Scrapes a value from the parsed document without verifying the header content.
+        /// </summary>
+        /// <param name="valueXpath">The XPath used to obtain the required value.</param>
+        /// <returns>The scraped value.</returns>
         private string ScrapeInformationWithoutHeader(string valueXpath)
         {
             return ScrapeInformation(string.Empty, valueXpath, string.Empty);
         }
 
+        /// <summary>
+        /// Scrapes a value from the parsed document using an XPath.
+        /// </summary>
+        /// <param name="categoryXpath">The XPath used to obtain the category text. Supply <c>String.Empty</c> if the category is not necessary.</param>
+        /// <param name="valueXpath">The XPath used to obtain the required value.</param>
+        /// <param name="expectedCategoryText">The value with wich to compare against the scraped category text</param>
+        /// <returns>The scraped value.</returns>
         private string ScrapeInformation(string categoryXpath, string valueXpath, string expectedCategoryText)
         {
             if (!string.IsNullOrWhiteSpace(valueXpath))
@@ -622,6 +656,22 @@ namespace MangaUpdatesCheck
 
 
             return string.Empty;
+        }
+
+        /// <summary>
+        /// Scrapes the requested value from the parsed document and compares it with an expected value.
+        /// </summary>
+        /// <param name="categoryXpath">The XPath used to obtain the category text. Supply <c>String.Empty</c> if the category is not necessary.</param>
+        /// <param name="valueXpath">The XPath used to obtain the required value.</param>
+        /// <param name="expectedCategoryText">The value with wich to compare against the scraped category text.</param>
+        /// <param name="expectedText">The value with which to compare the scraped value.</param>
+        /// <returns>The result of the comparison.</returns>
+        private bool ScrapeAndCompareInformation(string categoryXpath, string valueXpath, string expectedCategoryText, string expectedText)
+        {
+            string value = ScrapeInformation(categoryXpath, valueXpath, expectedCategoryText);
+
+            return Regex.IsMatch(value, expectedText, regexOptions);
+
         }
 
         private HtmlNode ScrapeInformationAsHtmlNode(string categoryXpath, string valueXpath, string expectedCategoryText)
