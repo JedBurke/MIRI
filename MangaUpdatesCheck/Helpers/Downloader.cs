@@ -55,7 +55,9 @@ namespace MangaUpdatesCheck.Helpers
                     {
                         System.Threading.Thread.Sleep(300);
                     }
-                                        
+
+                    _webClient.Headers[HttpRequestHeader.Referer] = uri.ToString();
+                    _webClient.Headers[HttpRequestHeader.Host] = uri.Host;
                     response = _webClient.UploadValues(uri, parameters);
 
                     break;

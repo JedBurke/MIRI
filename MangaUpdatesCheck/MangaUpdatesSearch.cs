@@ -51,8 +51,8 @@ namespace MangaUpdatesCheck
                 seriesSanitized = Helpers.Search.FormatParameters(series);
 
                 param = new NameValueCollection();
-                param.Add("act", "series");
-                param.Add("stype", "title");
+                //param.Add("act", "series");
+                //param.Add("stype", "title");
                 param.Add("search", seriesSanitized);
                 param.Add("x", "0");
                 param.Add("y", "0");

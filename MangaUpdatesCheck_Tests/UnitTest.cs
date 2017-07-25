@@ -16,9 +16,9 @@ namespace MangaUpdatesCheck_Tests
         public void Search_Test()
         {
             MangaUpdatesSearch series = new MangaUpdatesSearch();
-            Downloader.Instance.UserAgent = "MUC-R";
+            //Downloader.Instance.UserAgent = "MUC-R";
 
-            var item = series.Search("Houkago Play");
+            var item = series.Search("Need a Girl");
 
             Console.WriteLine("Title: {0}", item.Title);
             Console.WriteLine("---------------");
@@ -81,7 +81,18 @@ namespace MangaUpdatesCheck_Tests
         [TestMethod]
         public void DownloaderUpload_Test()
         {
-            
+            var i = new System.Collections.Specialized.NameValueCollection();
+
+            i.Add("act", "series");
+            i.Add("stype", "title");
+            i.Add("search", "need+a+girl");
+            i.Add("x", "0");
+            i.Add("y", "0");
+            i.Add("output", "json");
+
+            byte[] v = Downloader.Instance.UploadValues(new Uri("https://www.mangaupdates.com/search.html"), i);
+
+            Console.WriteLine(System.Text.Encoding.UTF8.GetString(v));
         }
     }
 }
