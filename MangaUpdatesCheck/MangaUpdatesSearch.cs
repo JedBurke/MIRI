@@ -51,8 +51,9 @@ namespace MangaUpdatesCheck
                 seriesSanitized = Helpers.Search.FormatParameters(series);
 
                 param = new NameValueCollection();
-                //param.Add("act", "series");
-                //param.Add("stype", "title");
+                param.Add("act", "series");
+                param.Add("stype", "title");
+                param.Add("session", string.Empty);
                 param.Add("search", seriesSanitized);
                 param.Add("x", "0");
                 param.Add("y", "0");
@@ -62,16 +63,23 @@ namespace MangaUpdatesCheck
 
                 response = Helpers.Downloader.Instance.UploadValues(new Uri(Properties.Resources.SeriesSearchUri), param);
 
-                using (var serializeResults = new SerializeResults())
+                if (response != null && response.Length > 0)
                 {
-                    results = serializeResults.Serialize(response);
+                    using (var serializeResults = new SerializeResults())
+                    {
+                        results = serializeResults.Serialize(response);
+                    }
+
+                    // Todo: Do a proper word-boundary comparison.
+                    var item = results.Items.FirstOrDefault(i => i.Title == series);
+                    var info = FetchSeriesData(item.Id);
+
+                    return info;
                 }
-
-                // Todo: Do a proper word-boundary comparison.
-                var item = results.Items.FirstOrDefault(i => i.Title == series);
-                var info = FetchSeriesData(item.Id);
-
-                return info;
+                else
+                {
+                    return null;
+                }
             }
             finally
             {

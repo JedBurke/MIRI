@@ -18,13 +18,20 @@ namespace MangaUpdatesCheck_Tests
             MangaUpdatesSearch series = new MangaUpdatesSearch();
             //Downloader.Instance.UserAgent = "MUC-R";
 
-            var item = series.Search("Need a Girl");
+            var item = series.Search("I need a Girl");
 
-            Console.WriteLine("Title: {0}", item.Title);
-            Console.WriteLine("---------------");
-            Console.WriteLine("Description: {0}", item.Description);
-            Console.WriteLine("Series type: {0}", item.SeriesType);
-            Console.WriteLine("Is completed? {0} | Is fully scanlated? {1}", Results.BoolToNaturalEnglish(item.IsCompleted), Results.BoolToNaturalEnglish(item.IsFullyScanlated));
+            if (item != null)
+            {
+                Console.WriteLine("Title: {0}", item.Title);
+                Console.WriteLine("---------------");
+                Console.WriteLine("Description: {0}", item.Description);
+                Console.WriteLine("Series type: {0}", item.SeriesType);
+                Console.WriteLine("Is completed? {0} | Is fully scanlated? {1}", Results.BoolToNaturalEnglish(item.IsCompleted), Results.BoolToNaturalEnglish(item.IsFullyScanlated));
+            }
+            else
+            {
+                Console.WriteLine("Series not found.");
+            }
         }
 
         [TestMethod]
@@ -84,13 +91,14 @@ namespace MangaUpdatesCheck_Tests
             var i = new System.Collections.Specialized.NameValueCollection();
 
             i.Add("act", "series");
+            i.Add("session", string.Empty);
             i.Add("stype", "title");
-            i.Add("search", "need+a+girl");
+            i.Add("search", MangaUpdatesCheck.Helpers.Search.FormatParameters("Houkago Play"));
             i.Add("x", "0");
             i.Add("y", "0");
             i.Add("output", "json");
 
-            byte[] v = Downloader.Instance.UploadValues(new Uri("https://www.mangaupdates.com/search.html"), i);
+            byte[] v = Downloader.Instance.UploadValues(new Uri("https://www.mangaupdates.com/series.html"), i);
 
             Console.WriteLine(System.Text.Encoding.UTF8.GetString(v));
         }
