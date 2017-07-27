@@ -34,12 +34,12 @@ else
 
 ```
 
-Documentation will be incrementally released at a later date.
+Documentation will be incrementally added and released at a later date.
 
 ### Technical
 
-It is written C# 5.0 targets .NET 4.5
+It is written in C# 5.0 and targets .NET 4.5
 
 ### Closing
 
-This library is a work-in-progress and the API it subject to change in the future.
+This library is a work-in-progress and the API is subject to change in the future.
