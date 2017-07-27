@@ -7,16 +7,14 @@ using System.Runtime.Serialization;
 
 namespace MangaUpdatesCheck.Serialization
 {
-    // Todo: Move to interface.
-
     [DataContract(Name = "item")]
     public class Item : IResultItem
     {
         [DataMember(Name = "id")]
-        public int Id { get; set;}
-        
+        public int Id { get; set; }
+
         [DataMember(Name = "title")]
-        public string Title { get; set;}
+        public string Title { get; set; }
 
         [DataMember(Name = "year")]
         public int? Year { get; set; }
@@ -25,7 +23,7 @@ namespace MangaUpdatesCheck.Serialization
         public string Genre { get; set; }
 
         [DataMember(Name = "rating")]
-        public double? Rating { get; set;}
+        public double? Rating { get; set; }
 
         [DataMember(Name = "v_inc")]
         public object VInc { get; set; }
@@ -35,7 +33,7 @@ namespace MangaUpdatesCheck.Serialization
 
         [DataMember(Name = "list_type")]
         public object ListType { get; set; }
-            
+
         [DataMember(Name = "is_associated_name")]
         public bool IsAssociatedName { get; set; }
     }

@@ -18,7 +18,7 @@ namespace MangaUpdatesCheck_Tests
             MangaUpdatesSearch series = new MangaUpdatesSearch();
             //Downloader.Instance.UserAgent = "MUC-R";
 
-            var item = series.Search("I need a Girl");
+            var item = series.Search("Houkago play");
 
             if (item != null)
             {

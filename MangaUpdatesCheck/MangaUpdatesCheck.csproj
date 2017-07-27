@@ -58,6 +58,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="SearchResultOutput.cs" />
+    <Compile Include="Serialization\IResultItemSimple.cs" />
     <Compile Include="Serialization\IResults.cs" />
     <Compile Include="Serialization\IResultItem.cs" />
     <Compile Include="Serialization\Item.cs" />

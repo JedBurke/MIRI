@@ -44,6 +44,8 @@ namespace MangaUpdatesCheck
 
         // IResults Search(string series, SearchResultOutput outputType);
 
+        IResults SearchSimple(string series);
+
         /// <summary>
         /// Does what Search(string) does.
         /// </summary>

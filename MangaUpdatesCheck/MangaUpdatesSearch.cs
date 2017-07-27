@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using MangaUpdatesCheck.Serialization;
+using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -45,7 +46,7 @@ namespace MangaUpdatesCheck
             string seriesSanitized = null;
             Serialization.IResults results = null;
             System.Collections.Specialized.NameValueCollection param = null;
-            
+
             try
             {
                 seriesSanitized = Helpers.Search.FormatParameters(series);
@@ -71,7 +72,7 @@ namespace MangaUpdatesCheck
                     }
 
                     // Todo: Do a proper word-boundary comparison.
-                    var item = results.Items.FirstOrDefault(i => i.Title == series);
+                    var item = results.Items.FirstOrDefault(i => string.Compare(i.Title, series, true) == 0);
                     var info = FetchSeriesData(item.Id);
 
                     return info;
@@ -96,7 +97,7 @@ namespace MangaUpdatesCheck
                 }
             }
         }
-        
+
         public ISeriesData FetchSeriesData(int id)
         {
             return FetchSeriesData(new Uri(string.Format(Properties.Resources.SeriesUriFormat, id)));
@@ -105,18 +106,49 @@ namespace MangaUpdatesCheck
         public ISeriesData FetchSeriesData(Uri uri)
         {
             ISeriesData parsedContent = null;
-            
+
             parsedContent = new SeriesData(Helpers.Downloader.Instance.DownloadString(uri));
-            
+
             return parsedContent;
 
         }
-        
-        /// Todo: Move Search(string) code to 
+
+        /// Todo: Move Search(string) code to FetchSeriesData
+        /// Search will do a literal search and return the results as IResults.
+        /// FetchSeriesData is intended to do what Search(string) currently does.
 
         public ISeriesData FetchSeriesData(string series)
         {
             throw new NotImplementedException();
+        }
+
+
+        public IResults SearchSimple(string series)
+        {
+            NameValueCollection parameters = new NameValueCollection();
+
+            parameters.Add("search", Helpers.Search.FormatParameters(series));
+            parameters.Add("x", "0");
+            parameters.Add("y", "0");
+
+            byte[] response = Helpers.Downloader.Instance.UploadValues(new Uri("https://www.mangaupdates.com/search.html"), parameters);
+            IResults results = new Results();
+
+            if (response.Length > 0)
+            {
+                results.StartIndex = 0;
+                results.TotalResults = 0;
+                results.itemsPerPage = 0;
+
+                IResultItem item = new Item()
+                {
+                    Id = 5
+                };
+                
+            }
+
+
+            return results;
         }
     }
 }

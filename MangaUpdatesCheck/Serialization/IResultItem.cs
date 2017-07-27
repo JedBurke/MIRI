@@ -6,7 +6,20 @@ using System.Threading.Tasks;
 
 namespace MangaUpdatesCheck.Serialization
 {
-    interface IResultItem
+    public interface IResultItem : IResultItemSimple
     {
+        int? Year { get; set; }
+
+        string Genre { get; set; }
+
+        double? Rating { get; set; }
+
+        object VInc { get; set; }
+
+        object CInc { get; set; }
+
+        object ListType { get; set; }
+
+        bool IsAssociatedName { get; set; }
     }
 }

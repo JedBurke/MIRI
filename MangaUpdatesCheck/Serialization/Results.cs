@@ -21,5 +21,6 @@ namespace MangaUpdatesCheck.Serialization
 
         [DataMember(Name = "items")]
         public Item[] Items { get; set; }
+
     }
 }
