@@ -10,6 +10,7 @@ Miri is a library which allows the end-user to search and scrape data from manga
 
 ```csharp
 using MIRI;
+using MIRI.Helpers;
 ---
 
 MangaUpdatesSearch series = new MangaUpdatesSearch();
