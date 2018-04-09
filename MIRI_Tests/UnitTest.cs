@@ -104,11 +104,11 @@ namespace MIRI_Tests
         [TestMethod]
         public void Downloader_Test()
         {
-            Console.WriteLine(Downloader.Instance.DownloadString(new Uri("https://www.google.com")));
+            Assert.IsNotNull(Downloader.Instance.DownloadString(new Uri("https://www.google.com")));
         }
 
         [TestMethod]
-        public void DownloaderUpload_Test()
+        public void DownloaderPOST_Test()
         {
             var i = new System.Collections.Specialized.NameValueCollection();
 
