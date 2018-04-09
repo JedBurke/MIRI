@@ -41,7 +41,7 @@ namespace MIRI_Tests
             MangaUpdatesSearch miri = new MangaUpdatesSearch();
 
             var item = miri.Search("Houkago play");
-            
+
             Assert.IsNotNull(item);
             Assert.AreEqual("Houkago Play", item.Title);
             Assert.IsNotNull(item.Description);
@@ -56,24 +56,36 @@ namespace MIRI_Tests
 
 
         /// Todo: Fix site search.
-        [Ignore]
+        //[Ignore]
         [TestMethod]
         public void SiteSearch_Test()
         {
-            /// Uncomment for live searching.
-            // MangaUpdatesSearch muSearch = new MangaUpdatesSearch();
-            // var results = muSearch.SearchSite("Need a Girl");
+            bool liveSearch = false;
+            MIRI.Serialization.ISiteSearchResult[] results = null;
 
-            var serialize = new SerializeResultsSiteSearch();
-            var serializer = new SerializeResultsSiteSearch();
-            var results = serializer.Serialize(Properties.Resources.Baka_Updates_Manga___Search_Results);
+            if (liveSearch)
+            {
+                //MangaUpdatesSearch muSearch = new MangaUpdatesSearch();
+                //results = muSearch.SearchSite("Need a Girl");
+            }
+            else
+            {
+                var serializer = new SerializeResultsSiteSearch();
+                results = serializer.Serialize(Properties.Resources.Baka_Updates_Manga___Search_Results);
+            }
 
-            //Console.WriteLine("Total Items: {0}", results.TotalResults);
 
-            //foreach (var i in results.Items)
-            //{
-            //    Console.WriteLine("#{0} - {1}", i.Id, i.Title);
-            //}
+            Assert.IsNotNull(results);
+
+            Console.WriteLine("Total Items: {0}", results.Length);
+            foreach (var result in results)
+            {
+                Assert.IsNotNull(result);
+
+                Assert.IsNotNull(result.Series);
+                Assert.IsNotNull(result.Group);
+                Console.WriteLine("{0} - Vol. {1}, Chap. {2} - Group: {3} - Date {4}", result.Series, result.Volume, result.Chapter, result.Group, result.Date);
+            }
 
         }
 
