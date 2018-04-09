@@ -1,13 +1,15 @@
-# Manga-Updates Check
+## Manga Information Retrieval Interface or Miri
 
 ### What it is and what it does
 
-MangaUpdatesCheck is a simple class library which allows the end-user to search and scrape data from MangaUpdates.com.
+Miri is a library which allows the end-user to search and scrape data from manga information databases. Currently MangaUpdates is the only supported platform.
 
-### Usage
+*Note:* The project has been renamed from MangaUpdatesCheck to MIRI. Some references to the old name may be present for the time being.
+
+### Sample usage
 
 ```csharp
-using MangaUpdatesCheck;
+using MIRI;
 ---
 
 MangaUpdatesSearch series = new MangaUpdatesSearch();
