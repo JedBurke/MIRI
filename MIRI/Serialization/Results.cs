@@ -17,10 +17,21 @@ namespace MIRI.Serialization
         public int StartIndex { get; set;}
 
         [DataMember(Name = "itemsPerPage")]
-        public int itemsPerPage { get; set; }
+        public int ItemsPerPage { get; set; }
 
         [DataMember(Name = "items")]
-        public IResultItemSimple[] Items { get; set; }
-
+        public Item[] Items { get; set; }
+        
+        IResultItem[] IResults.Items
+        {
+            get
+            {
+                return this.Items;
+            }
+            set
+            {
+                this.Items = (Item[])value;
+            }
+        }
     }
 }

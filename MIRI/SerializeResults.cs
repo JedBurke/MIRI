@@ -22,14 +22,19 @@ namespace MIRI
             sanitizedResponse = sanitizedResponse.Remove(0, 11);
             sanitizedResponse = sanitizedResponse.Substring(0, sanitizedResponse.Length - 1);
 
+            IResults serializedObject = null;
+
             using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(sanitizedResponse)))
             {
-                Serialization.Results results = new Serialization.Results();
+                IResults results = new Serialization.Results();
 
                 DataContractJsonSerializer ser = new DataContractJsonSerializer(results.GetType());
 
-                return (Serialization.Results)ser.ReadObject(ms);
+                results = (Results)ser.ReadObject(ms);
+                serializedObject = (IResults)results;
             }
+
+            return serializedObject;
         }
 
         public void Dispose()

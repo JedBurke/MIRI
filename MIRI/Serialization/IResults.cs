@@ -10,7 +10,7 @@ namespace MIRI.Serialization
     {
         long TotalResults { get; set; }
         int StartIndex { get; set; }
-        int itemsPerPage { get; set; }
-        IResultItemSimple[] Items { get; set; }
+        int ItemsPerPage { get; set; }
+        IResultItem[] Items { get; set; }
     }
 }
