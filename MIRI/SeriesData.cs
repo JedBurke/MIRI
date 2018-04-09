@@ -190,7 +190,7 @@ namespace MIRI
         }
 
         /// <summary>
-        /// Gets the series description1.
+        /// Gets the series description.
         /// </summary>
         public string Description
         {

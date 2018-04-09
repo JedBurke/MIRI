@@ -123,7 +123,7 @@ namespace MIRI
         }
 
 
-        public IResults[] SearchSite(string query)
+        public IResults SearchSite(string query)
         {
             NameValueCollection parameters = new NameValueCollection();
 
@@ -133,7 +133,7 @@ namespace MIRI
 
             byte[] response = Helpers.Downloader.Instance.UploadValues(new Uri("https://www.mangaupdates.com/search.html"), parameters);
 
-            IResults[] results = null;
+            IResults results = null;
 
             if (response.Length > 0)
             {
@@ -179,6 +179,6 @@ namespace MIRI
 
             return results;
         }
-
+        
     }
 }

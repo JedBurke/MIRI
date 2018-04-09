@@ -20,13 +20,13 @@ namespace MIRI.Serialization
             set;
         }
 
-        public int itemsPerPage
+        public int ItemsPerPage
         {
             get;
             set;
         }
 
-        public IResultItemSimple[] Items
+        public IResultItem[] Items
         {
             get;
             set;

@@ -26,7 +26,7 @@ namespace MIRI
 
             using (MemoryStream ms = new MemoryStream(Encoding.UTF8.GetBytes(sanitizedResponse)))
             {
-                Serialization.Results results = new Serialization.Results();
+                IResults results = new Serialization.Results();
 
                 DataContractJsonSerializer ser = new DataContractJsonSerializer(results.GetType());
 

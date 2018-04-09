@@ -15,15 +15,16 @@ namespace MIRI_Tests
         [TestMethod]
         public void Search_Test()
         {
-            MangaUpdatesSearch series = new MangaUpdatesSearch();
+            MangaUpdatesSearch miri = new MangaUpdatesSearch();
             
-            var item = series.Search("Houkago play");
+            var item = miri.Search("Houkago play");
 
             if (item != null)
             {
                 Console.WriteLine("Title: {0}", item.Title);
                 Console.WriteLine("---------------");
                 Console.WriteLine("Description: {0}", item.Description);
+                Console.WriteLine("-----");
                 Console.WriteLine("Series type: {0}", item.SeriesType);
                 Console.WriteLine("Is completed? {0} | Is fully scanlated? {1}", Results.BoolToNaturalEnglish(item.IsCompleted), Results.BoolToNaturalEnglish(item.IsFullyScanlated));
             }
@@ -72,8 +73,6 @@ namespace MIRI_Tests
             //Console.WriteLine("Items per page: {0}", results.itemsPerPage);
             var result = results.Items.Cast<MIRI.Serialization.Item>().FirstOrDefault(i => string.Compare(i.Title, "Itoshi no Kana", true) == 0);
             result.Id = 0;
-
-
         }
 
         [TestMethod]
