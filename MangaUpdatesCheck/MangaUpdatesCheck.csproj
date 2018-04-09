@@ -61,9 +61,14 @@
     <Compile Include="Serialization\IResultItemSimple.cs" />
     <Compile Include="Serialization\IResults.cs" />
     <Compile Include="Serialization\IResultItem.cs" />
+    <Compile Include="Serialization\ISiteSearchResults.cs" />
     <Compile Include="Serialization\Item.cs" />
+    <Compile Include="Serialization\ItemGeneral.cs" />
     <Compile Include="Serialization\Results.cs" />
+    <Compile Include="Serialization\ResultsGeneral.cs" />
+    <Compile Include="Serialization\SiteSearchResults.cs" />
     <Compile Include="SerializeResults.cs" />
+    <Compile Include="SerializeResultsSiteSearch.cs" />
     <Compile Include="SeriesData.cs" />
     <Compile Include="SeriesType.cs" />
   </ItemGroup>

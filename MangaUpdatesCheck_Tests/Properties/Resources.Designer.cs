@@ -76,5 +76,22 @@ namespace MangaUpdatesCheck_Tests.Properties {
                 return ResourceManager.GetString("Baka_Updates_Manga___Itoshi_no_Kana", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.01 Transitional//EN&quot;
+        ///&quot;http://www.w3.org/TR/html4/loose.dtd&quot;&gt;
+        ///&lt;html&gt;
+        /// &lt;head&gt;
+        ///  &lt;title&gt;Baka-Updates Manga - Search Results&lt;/title&gt;
+        ///  &lt;meta name=&quot;description&quot; content=&quot;Latest And Newest Manga Release Updates and News.&quot;&gt;
+        ///  &lt;meta name=&quot;keywords&quot; content=&quot;manga, anime, updates, update, releases, release, new, scanlators, scanlator, wiki&quot;&gt;
+        ///  &lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot;&gt;
+        ///  &lt;meta name=&quot;author&quot; content=&quot;Manick(Code&amp;amp;Html) [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string Baka_Updates_Manga___Search_Results {
+            get {
+                return ResourceManager.GetString("Baka_Updates_Manga___Search_Results", resourceCulture);
+            }
+        }
     }
 }

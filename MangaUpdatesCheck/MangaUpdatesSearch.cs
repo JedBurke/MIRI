@@ -123,32 +123,60 @@ namespace MangaUpdatesCheck
         }
 
 
-        public IResults SearchSimple(string series)
+        public IResults SearchSite(string query)
         {
             NameValueCollection parameters = new NameValueCollection();
 
-            parameters.Add("search", Helpers.Search.FormatParameters(series));
+            parameters.Add("search", Helpers.Search.FormatParameters(query));
             parameters.Add("x", "0");
             parameters.Add("y", "0");
 
             byte[] response = Helpers.Downloader.Instance.UploadValues(new Uri("https://www.mangaupdates.com/search.html"), parameters);
-            IResults results = new Results();
+
+            IResults results = null;
 
             if (response.Length > 0)
             {
-                results.StartIndex = 0;
-                results.TotalResults = 0;
-                results.itemsPerPage = 0;
+                //string resp = Encoding.UTF8.GetString(response);
 
-                IResultItem item = new Item()
-                {
-                    Id = 5
-                };
-                
+
+                //results.StartIndex = 0;
+                //results.TotalResults = 0;
+                //results.itemsPerPage = 0;
+
+                //IResultItem item = new Item()
+                //{
+                //    Id = 5
+                //};
+
+                results = new SerializeResultsSiteSearch().Serialize(response);
+
             }
 
 
             return results;
         }
+
+        public ISiteSearchResult PerformSiteSearch(string query)
+        {
+            NameValueCollection parameters = new NameValueCollection();
+
+            parameters.Add("search", Helpers.Search.FormatParameters(query));
+            parameters.Add("x", "0");
+            parameters.Add("y", "0");
+
+            byte[] response = Helpers.Downloader.Instance.UploadValues(new Uri("https://www.mangaupdates.com/search.html"), parameters);
+
+            ISiteSearchResult results = null;
+
+            if (response.Length > 0)
+            {
+                results = new SerializeResultsSiteSearch().Serialize(response);
+            }
+
+
+            return results;
+        }
+
     }
 }

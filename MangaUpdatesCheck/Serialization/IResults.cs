@@ -11,6 +11,6 @@ namespace MangaUpdatesCheck.Serialization
         long TotalResults { get; set; }
         int StartIndex { get; set; }
         int itemsPerPage { get; set; }
-        Item[] Items { get; set; }
+        IResultItemSimple[] Items { get; set; }
     }
 }

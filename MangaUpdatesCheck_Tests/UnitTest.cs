@@ -16,8 +16,7 @@ namespace MangaUpdatesCheck_Tests
         public void Search_Test()
         {
             MangaUpdatesSearch series = new MangaUpdatesSearch();
-            //Downloader.Instance.UserAgent = "MUC-R";
-
+            
             var item = series.Search("Houkago play");
 
             if (item != null)
@@ -32,6 +31,29 @@ namespace MangaUpdatesCheck_Tests
             {
                 Console.WriteLine("Series not found.");
             }
+        }
+
+        
+        /// Todo: Fix site search.
+        [Ignore]
+        [TestMethod]
+        public void SiteSearch_Test()
+        {
+            /// Uncomment for live searching.
+            // MangaUpdatesSearch muSearch = new MangaUpdatesSearch();
+            // var results = muSearch.SearchSite("Need a Girl");
+
+            var serialize = new SerializeResultsSiteSearch();
+            var serializer = new SerializeResultsSiteSearch();
+            var results = serializer.Serialize(Properties.Resources.Baka_Updates_Manga___Search_Results);
+
+            //Console.WriteLine("Total Items: {0}", results.TotalResults);
+
+            //foreach (var i in results.Items)
+            //{
+            //    Console.WriteLine("#{0} - {1}", i.Id, i.Title);
+            //}
+
         }
 
         [TestMethod]

@@ -42,9 +42,13 @@ namespace MangaUpdatesCheck
         /// <returns>Returns an ISeriesData object representing the parsed series page.</returns>
         ISeriesData Search(string series, SearchResultOutput outputType);
 
-        // IResults Search(string series, SearchResultOutput outputType);
-
-        IResults SearchSimple(string series);
+        /// <summary>
+        /// Performs a general site search.
+        /// </summary>
+        /// <param name="query">The series to query.</param>
+        /// <returns></returns>
+        IResults SearchSite(string query);
+        
 
         /// <summary>
         /// Does what Search(string) does.

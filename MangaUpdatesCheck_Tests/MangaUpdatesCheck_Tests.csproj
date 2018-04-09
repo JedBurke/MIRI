@@ -76,6 +76,9 @@
   <ItemGroup>
     <None Include="Resources\Baka-Updates Manga - Itoshi no Kana.htm" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Baka-Updates Manga - Search Results.htm" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>

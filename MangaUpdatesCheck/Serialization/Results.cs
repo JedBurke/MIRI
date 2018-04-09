@@ -20,7 +20,7 @@ namespace MangaUpdatesCheck.Serialization
         public int itemsPerPage { get; set; }
 
         [DataMember(Name = "items")]
-        public Item[] Items { get; set; }
+        public IResultItemSimple[] Items { get; set; }
 
     }
 }
