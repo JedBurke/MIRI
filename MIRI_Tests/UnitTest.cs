@@ -12,11 +12,12 @@ namespace MIRI_Tests
     [TestClass]
     public class UnitTest
     {
+        [Ignore]
         [TestMethod]
         public void Search_Test()
         {
             MangaUpdatesSearch miri = new MangaUpdatesSearch();
-            
+
             var item = miri.Search("Houkago play");
 
             if (item != null)
@@ -34,7 +35,26 @@ namespace MIRI_Tests
             }
         }
 
-        
+        [TestMethod]
+        public void SearchHoukagoPlay_Test()
+        {
+            MangaUpdatesSearch miri = new MangaUpdatesSearch();
+
+            var item = miri.Search("Houkago play");
+            
+            Assert.IsNotNull(item);
+            Assert.AreEqual("Houkago Play", item.Title);
+            Assert.IsNotNull(item.Description);
+            Assert.AreEqual(SeriesType.Manga, item.SeriesType);
+            Assert.IsFalse(item.IsCompleted);
+
+            /* Pains me to write this and I someday hope the
+             * following line causes this test to fail.
+             */
+            Assert.IsFalse(item.IsFullyScanlated);
+        }
+
+
         /// Todo: Fix site search.
         [Ignore]
         [TestMethod]
@@ -65,7 +85,7 @@ namespace MIRI_Tests
 
 
             MemoryStream ms = new MemoryStream(File.ReadAllBytes("result.txt"));
-            
+
             DataContractJsonSerializer ser = new DataContractJsonSerializer(results.GetType());
 
             results = (MIRI.Serialization.Results)ser.ReadObject(ms);
