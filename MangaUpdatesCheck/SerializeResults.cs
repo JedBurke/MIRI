@@ -1,4 +1,4 @@
-﻿using MangaUpdatesCheck.Serialization;
+﻿using MIRI.Serialization;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Json;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaUpdatesCheck
+namespace MIRI
 {
     public class SerializeResults : ISerializeResults
     {

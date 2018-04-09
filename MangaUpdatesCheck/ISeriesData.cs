@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaUpdatesCheck
+namespace MIRI
 {
     /// <summary>
     /// Represents properties used to display information about series found on Manga-Updates.

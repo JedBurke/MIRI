@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using MangaUpdatesCheck;
-using MangaUpdatesCheck.Helpers;
+using MIRI;
+using MIRI.Helpers;
 using System;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
@@ -59,7 +59,7 @@ namespace MangaUpdatesCheck_Tests
         [TestMethod]
         public void Serialize_Test()
         {
-            MangaUpdatesCheck.Serialization.Results results = new MangaUpdatesCheck.Serialization.Results();
+            MIRI.Serialization.Results results = new MIRI.Serialization.Results();
 
 
 
@@ -67,10 +67,10 @@ namespace MangaUpdatesCheck_Tests
             
             DataContractJsonSerializer ser = new DataContractJsonSerializer(results.GetType());
 
-            results = (MangaUpdatesCheck.Serialization.Results)ser.ReadObject(ms);
+            results = (MIRI.Serialization.Results)ser.ReadObject(ms);
 
             //Console.WriteLine("Items per page: {0}", results.itemsPerPage);
-            var result = results.Items.Cast<MangaUpdatesCheck.Serialization.Item>().FirstOrDefault(i => string.Compare(i.Title, "Itoshi no Kana", true) == 0);
+            var result = results.Items.Cast<MIRI.Serialization.Item>().FirstOrDefault(i => string.Compare(i.Title, "Itoshi no Kana", true) == 0);
             result.Id = 0;
 
 
@@ -115,7 +115,7 @@ namespace MangaUpdatesCheck_Tests
             i.Add("act", "series");
             i.Add("session", string.Empty);
             i.Add("stype", "title");
-            i.Add("search", MangaUpdatesCheck.Helpers.Search.FormatParameters("Houkago Play"));
+            i.Add("search", MIRI.Helpers.Search.FormatParameters("Houkago Play"));
             i.Add("x", "0");
             i.Add("y", "0");
             i.Add("output", "json");

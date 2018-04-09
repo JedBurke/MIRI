@@ -1,11 +1,11 @@
-﻿using MangaUpdatesCheck.Serialization;
+﻿using MIRI.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaUpdatesCheck
+namespace MIRI
 {
     /// <summary>
     /// Provides methods used to search and scrape manga and novel series information from Manga-Updates.

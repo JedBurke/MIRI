@@ -1,4 +1,4 @@
-﻿using MangaUpdatesCheck.Serialization;
+﻿using MIRI.Serialization;
 using HtmlAgilityPack;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 using System.IO;
 using System.Runtime.Serialization.Json;
 
-namespace MangaUpdatesCheck
+namespace MIRI
 {
     /// <summary>
     /// Provides methods used to search and scrape data from Manga-Updates.

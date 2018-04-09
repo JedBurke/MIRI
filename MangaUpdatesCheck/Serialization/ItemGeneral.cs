@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaUpdatesCheck.Serialization
+namespace MIRI.Serialization
 {
     public class ItemGeneral : IResultItemSimple
     {

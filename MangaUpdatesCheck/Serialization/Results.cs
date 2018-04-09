@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace MangaUpdatesCheck.Serialization
+namespace MIRI.Serialization
 {
     [DataContract(Name = "results", Namespace = "http://www.mangaupdates.com/xml")]
     public class Results : IResults

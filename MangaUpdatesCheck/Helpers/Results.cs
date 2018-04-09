@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaUpdatesCheck.Helpers
+namespace MIRI.Helpers
 {
     /// <summary>
     /// Represents a collection of static methods used to format the returned values of a series search.

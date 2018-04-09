@@ -1,5 +1,5 @@
 ﻿using HtmlAgilityPack;
-using MangaUpdatesCheck.Properties;
+using MIRI.Properties;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace MangaUpdatesCheck
+namespace MIRI
 {
     /// <summary>
     /// Represents an implementation for the ISeriesData interface employing XPath to scrape and display series data from Manga-Updates.

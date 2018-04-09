@@ -62,9 +62,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MangaUpdatesCheck\MangaUpdatesCheck.csproj">
+    <ProjectReference Include="..\MangaUpdatesCheck\MIRI.csproj">
       <Project>{5e2107df-686b-4552-8195-9290c2a56b19}</Project>
-      <Name>MangaUpdatesCheck</Name>
+      <Name>MIRI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

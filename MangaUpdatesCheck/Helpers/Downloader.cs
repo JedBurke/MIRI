@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MangaUpdatesCheck.Helpers
+namespace MIRI.Helpers
 {
     public class Downloader
     {

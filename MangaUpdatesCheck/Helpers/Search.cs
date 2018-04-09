@@ -6,7 +6,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace MangaUpdatesCheck.Helpers
+namespace MIRI.Helpers
 {
     /// <summary>
     /// Represents a collection of methods used with preparing for a series search.

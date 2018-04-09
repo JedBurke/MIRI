@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.Serialization;
 
-namespace MangaUpdatesCheck.Serialization
+namespace MIRI.Serialization
 {
     [DataContract(Name = "item")]
     public class Item : IResultItem
