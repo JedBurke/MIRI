@@ -7,7 +7,7 @@ using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Linq;
 
-namespace MangaUpdatesCheck_Tests
+namespace MIRI_Tests
 {
     [TestClass]
     public class UnitTest

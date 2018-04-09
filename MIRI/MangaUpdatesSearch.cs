@@ -137,19 +137,20 @@ namespace MIRI
 
             if (response.Length > 0)
             {
-                //string resp = Encoding.UTF8.GetString(response);
+                ////string resp = Encoding.UTF8.GetString(response);
 
 
-                //results.StartIndex = 0;
-                //results.TotalResults = 0;
-                //results.itemsPerPage = 0;
+                ////results.StartIndex = 0;
+                ////results.TotalResults = 0;
+                ////results.itemsPerPage = 0;
 
-                //IResultItem item = new Item()
-                //{
-                //    Id = 5
-                //};
+                ////IResultItem item = new Item()
+                ////{
+                ////    Id = 5
+                ////};
 
-                results = new SerializeResultsSiteSearch().Serialize(response);
+                // Todo: Uncomment
+                //results = new SerializeResultsSiteSearch().Serialize(response);
 
             }
 
@@ -171,7 +172,8 @@ namespace MIRI
 
             if (response.Length > 0)
             {
-                results = new SerializeResultsSiteSearch().Serialize(response);
+                // TODO: Uncomment
+                //results = new SerializeResultsSiteSearch().Serialize(response);
             }
 
 

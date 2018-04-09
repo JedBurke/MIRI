@@ -91,5 +91,15 @@ namespace MIRI
         public void Dispose()
         {
         }
+
+        IResults ISerializeResults.Serialize(string data)
+        {
+            throw new NotImplementedException();
+        }
+
+        IResults ISerializeResults.Serialize(byte[] data)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

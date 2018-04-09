@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2012 for Windows Desktop
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIRI", "MIRI.csproj", "{5E2107DF-686B-4552-8195-9290C2A56B19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIRI_Tests", "..\MangaUpdatesCheck_Tests\MIRI_Tests.csproj", "{033B67E7-32F8-4B16-B0C9-A7FB08B8E69C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MIRI_Tests", "..\MIRI_Tests\MIRI_Tests.csproj", "{033B67E7-32F8-4B16-B0C9-A7FB08B8E69C}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5E2107DF-686B-4552-8195-9290C2A56B19} = {5E2107DF-686B-4552-8195-9290C2A56B19}
 	EndProjectSection
