@@ -163,7 +163,7 @@ namespace MIRI
         {
             NameValueCollection parameters = new NameValueCollection();
 
-            parameters.Add("search", Helpers.Search.FormatParameters(query));
+            parameters.Add("search", query);
             parameters.Add("x", "0");
             parameters.Add("y", "0");
 

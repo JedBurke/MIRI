@@ -60,13 +60,13 @@ namespace MIRI_Tests
         [TestMethod]
         public void SiteSearch_Test()
         {
-            bool liveSearch = false;
+            bool liveSearch = true;
             MIRI.Serialization.ISiteSearchResult[] results = null;
 
             if (liveSearch)
             {
-                //MangaUpdatesSearch muSearch = new MangaUpdatesSearch();
-                //results = muSearch.SearchSite("Need a Girl");
+                MangaUpdatesSearch muSearch = new MangaUpdatesSearch();
+                results = muSearch.PerformSiteSearch("Need a Girl");
             }
             else
             {
@@ -74,8 +74,8 @@ namespace MIRI_Tests
                 results = serializer.Serialize(Properties.Resources.Baka_Updates_Manga___Search_Results);
             }
 
-
             Assert.IsNotNull(results);
+            Assert.AreNotEqual(0, results.Length);
 
             Console.WriteLine("Total Items: {0}", results.Length);
             foreach (var result in results)
