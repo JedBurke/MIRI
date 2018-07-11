@@ -18,45 +18,6 @@ namespace MIRI
             var results = document.DocumentNode.SelectNodes("//td[@id = 'main_content']/table//table/tr");
             int resultsCount = results.Count - 2;
 
-            //results.ToList().ForEach((e) =>
-            //{
-            //    /// Todo: Find a better way to exclude the header and footer table rows.
-            //    if (!e.InnerText.Contains("Date") && !e.InnerText.Contains("release"))
-            //    {
-            //        HtmlDocument doc = new HtmlDocument();
-            //        doc.LoadHtml(e.InnerHtml);
-
-            //        Console.WriteLine(doc.DocumentNode.SelectSingleNode("//a[@title = 'Series Info']").InnerText);
-
-            //    }
-
-            //});
-
-            //List<ItemGeneral> items = new List<ItemGeneral>();
-            //results.ToList().ForEach((e) =>
-            //{
-            //    if (!e.InnerText.Contains("Date") && !e.InnerText.Contains("release"))
-            //    {
-            //        HtmlDocument doc = new HtmlDocument();
-            //        doc.LoadHtml(e.InnerHtml);
-
-            //        var title = doc.DocumentNode.SelectSingleNode("//a[@title = 'Series Info']").InnerText;
-
-            //        items.Add(new ItemGeneral
-            //        {
-            //            Id = 0,
-            //            Title = title
-            //        });
-            //    }
-
-            //});
-
-            ////ISiteSearchResults result = new SiteSearchResults(
-
-            //result.Items = items.ToArray();
-
-            //return result;
-
             List<ISiteSearchResult> items = new List<ISiteSearchResult>();
 
             results.ToList().ForEach((e) =>
@@ -66,18 +27,22 @@ namespace MIRI
                     HtmlDocument doc = new HtmlDocument();
                     doc.LoadHtml(e.InnerHtml);
 
-                    var title = doc.DocumentNode.SelectSingleNode("//a[@title = 'Series Info']").InnerText;
+                    var seriesElement = doc.DocumentNode.SelectSingleNode("//a[@title = 'Series Info']");
+                    var groupElement = doc.DocumentNode.SelectSingleNode("//a[@title = 'Group Info']");
+
+                    var series = seriesElement.InnerText;
+                    Uri seriesUri = null;
                     var date = DateTime.Now;
-                    var volume = 0.0;
-                    var chapter = 0.0;
-                    var group = doc.DocumentNode.SelectSingleNode("//a[@title = 'Group Info']").InnerText;
+                    var volume = doc.DocumentNode.SelectSingleNode("//td[3]").InnerText;
+                    var chapter = doc.DocumentNode.SelectSingleNode("//td[4]").InnerText;
+                    var group = groupElement.InnerText;
+                    Uri groupUri = null;
 
-
+                    Uri.TryCreate(seriesElement.GetAttributeValue("href", null), UriKind.Absolute, out seriesUri);
+                    Uri.TryCreate(groupElement.GetAttributeValue("href", null), UriKind.Absolute, out groupUri);
                     DateTime.TryParse(doc.DocumentNode.SelectSingleNode("//td[1]").InnerText, out date);
 
-                    // Todo: Implement series id and group id.
-
-                    items.Add(new SiteSearchResult(title, group, date, volume, chapter));
+                    items.Add(SiteSearchResult.CreateResult(series, seriesUri, date, volume, chapter, group, groupUri));
                 }
 
             });

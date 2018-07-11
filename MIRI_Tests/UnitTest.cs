@@ -84,7 +84,17 @@ namespace MIRI_Tests
 
                 Assert.IsNotNull(result.Series);
                 Assert.IsNotNull(result.Group);
-                Console.WriteLine("{0} - Vol. {1}, Chap. {2} - Group: {3} - Date {4}", result.Series, result.Volume, result.Chapter, result.Group, result.Date);
+                
+
+                Console.WriteLine("{0} - Vol. {1}, Chap. {2} - Group: {3} - Released on {4} - Series Uri: {5} - Group Uri: {6}",
+                    result.Series,
+                    result.Volume,
+                    result.Chapter,
+                    result.Group,
+                    result.Date.ToShortDateString(),
+                    result.SeriesUri,
+                    result.GroupUri
+                 );
             }
 
         }
