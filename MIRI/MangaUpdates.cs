@@ -180,16 +180,6 @@ namespace MIRI
             return results;
         }
 
-        /// <summary>
-        
-        /// </summary>
-        /// <param name="query"></param>
-        /// <returns></returns>
-        public ISeriesResult[] SearchBy(string query)
-        {
-            return new[] { new SearchResult() };
-        }
-
         public string GetSearchByOptionParameter(SearchByOption option)
         {
             switch (option)
