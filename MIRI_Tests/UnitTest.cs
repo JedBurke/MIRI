@@ -16,7 +16,7 @@ namespace MIRI_Tests
         [TestMethod]
         public void Search_Test()
         {
-            MangaUpdatesSearch miri = new MangaUpdatesSearch();
+            MangaUpdates miri = new MangaUpdates();
 
             var item = miri.Search("Houkago play");
 
@@ -38,7 +38,7 @@ namespace MIRI_Tests
         [TestMethod]
         public void SearchHoukagoPlay_Test()
         {
-            MangaUpdatesSearch miri = new MangaUpdatesSearch();
+            MangaUpdates miri = new MangaUpdates();
 
             var item = miri.Search("Houkago play");
 
@@ -65,7 +65,7 @@ namespace MIRI_Tests
 
             if (liveSearch)
             {
-                MangaUpdatesSearch muSearch = new MangaUpdatesSearch();
+                MangaUpdates muSearch = new MangaUpdates();
                 results = muSearch.PerformSiteSearch("Need a Girl");
             }
             else

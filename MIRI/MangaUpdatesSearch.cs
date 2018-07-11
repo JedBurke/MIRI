@@ -16,12 +16,12 @@ namespace MIRI
     /// <summary>
     /// Provides methods used to search and scrape data from Manga-Updates.
     /// </summary>
-    public class MangaUpdatesSearch : IMangaUpdatesSearch
+    public class MangaUpdates : IMangaUpdates
     {
         /// <summary>
         /// Initializes a new instance of the MangaUpdatesSearch class.
         /// </summary>
-        public MangaUpdatesSearch()
+        public MangaUpdates()
         {
         }
 
