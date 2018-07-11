@@ -73,6 +73,7 @@ namespace MIRI
 
                     // Todo: Do a proper word-boundary comparison.
                     var item = results.Items.FirstOrDefault(i => string.Compare(i.Title, series, true) == 0);
+                    
                     var info = FetchSeriesData(item.Id);
 
                     return info;
@@ -158,7 +159,7 @@ namespace MIRI
             return results;
         }
 
-        public ISiteSearchResult PerformSiteSearch(string query)
+        public ISiteSearchResult[] PerformSiteSearch(string query)
         {
             NameValueCollection parameters = new NameValueCollection();
 
@@ -168,17 +169,101 @@ namespace MIRI
 
             byte[] response = Helpers.Downloader.Instance.UploadValues(new Uri("https://www.mangaupdates.com/search.html"), parameters);
 
-            ISiteSearchResult results = null;
+            ISiteSearchResult[] results = null;
 
             if (response.Length > 0)
             {
-                // TODO: Uncomment
-                //results = new SerializeResultsSiteSearch().Serialize(response);
+                results = new SerializeResultsSiteSearch().Serialize(response);
             }
 
 
             return results;
         }
+
+        /// <summary>
         
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        public ISeriesResult[] SearchBy(string query)
+        {
+            return new[] { new SearchResult() };
+        }
+
+        public string GetSearchByOptionParameter(SearchByOption option)
+        {
+            switch (option)
+            {
+                case SearchByOption.Description:
+                    return "description";
+                    
+                case SearchByOption.Title:
+                default:
+                    return "title";
+            }
+        }
     }
+
+    public enum SearchByOption : int
+    {
+        Title,
+        Description
+    }
+
+    public class SearchResult : ISeriesResult
+    {
+        public SearchResult()
+        {
+
+        }
+
+        public string[] Genre
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public int Year
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public double Rating
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string Series
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public Uri SeriesUri
+        {
+            get { throw new NotImplementedException(); }
+        }
+    }
+
+    public interface IBasicResult
+    {
+        string Series { get; }
+        Uri SeriesUri { get; }
+    }
+
+    public interface IReleaseResult : IBasicResult
+    {
+        DateTime Date { get; }
+        string Group { get; }
+        Uri GroupUri { get; }
+
+        string Chapter { get; }
+        string Volume { get; }
+    }
+
+    public interface ISeriesResult : IBasicResult
+    {
+        string[] Genre { get; }
+        int Year { get; }
+        double Rating { get; }
+    }
+
 }

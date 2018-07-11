@@ -72,6 +72,9 @@ namespace MIRI
                     var chapter = 0.0;
                     var group = doc.DocumentNode.SelectSingleNode("//a[@title = 'Group Info']").InnerText;
 
+
+                    DateTime.TryParse(doc.DocumentNode.SelectSingleNode("//td[1]").InnerText, out date);
+
                     // Todo: Implement series id and group id.
 
                     items.Add(new SiteSearchResult(title, group, date, volume, chapter));
