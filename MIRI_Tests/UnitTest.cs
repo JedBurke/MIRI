@@ -16,7 +16,7 @@ namespace MIRI_Tests
         [TestMethod]
         public void Search_Test()
         {
-            MangaUpdatesSearch miri = new MangaUpdatesSearch();
+            MangaUpdates miri = new MangaUpdates();
 
             var item = miri.Search("Houkago play");
 
@@ -38,7 +38,7 @@ namespace MIRI_Tests
         [TestMethod]
         public void SearchHoukagoPlay_Test()
         {
-            MangaUpdatesSearch miri = new MangaUpdatesSearch();
+            MangaUpdates miri = new MangaUpdates();
 
             var item = miri.Search("Houkago play");
 
@@ -60,22 +60,22 @@ namespace MIRI_Tests
         [TestMethod]
         public void SiteSearch_Test()
         {
-            bool liveSearch = false;
+            bool liveSearch = true;
             MIRI.Serialization.ISiteSearchResult[] results = null;
 
             if (liveSearch)
             {
-                //MangaUpdatesSearch muSearch = new MangaUpdatesSearch();
-                //results = muSearch.SearchSite("Need a Girl");
+                MangaUpdates muSearch = new MangaUpdates();
+                results = muSearch.PerformSiteSearch("Need a Girl");
             }
             else
             {
-                var serializer = new SerializeResultsSiteSearch();
+                var serializer = new SiteSearchResultsSerializer();
                 results = serializer.Serialize(Properties.Resources.Baka_Updates_Manga___Search_Results);
             }
 
-
             Assert.IsNotNull(results);
+            Assert.AreNotEqual(0, results.Length);
 
             Console.WriteLine("Total Items: {0}", results.Length);
             foreach (var result in results)
@@ -84,7 +84,17 @@ namespace MIRI_Tests
 
                 Assert.IsNotNull(result.Series);
                 Assert.IsNotNull(result.Group);
-                Console.WriteLine("{0} - Vol. {1}, Chap. {2} - Group: {3} - Date {4}", result.Series, result.Volume, result.Chapter, result.Group, result.Date);
+                
+
+                Console.WriteLine("{0} - Vol. {1}, Chap. {2} - Group: {3} - Released on {4} - Series Uri: {5} - Group Uri: {6}",
+                    result.Series,
+                    result.Volume,
+                    result.Chapter,
+                    result.Group,
+                    result.Date.ToShortDateString(),
+                    result.SeriesUri,
+                    result.GroupUri
+                 );
             }
 
         }

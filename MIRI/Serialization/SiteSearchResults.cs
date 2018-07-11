@@ -8,19 +8,26 @@ namespace MIRI.Serialization
 {
     public class SiteSearchResult : ISiteSearchResult
     {
-        private readonly string _series;
-        private readonly string _group;
-        private readonly DateTime _date;
-        private readonly double _volume;
-        private readonly double _chapter;
+        protected string _series;
+        protected string _group;
+        protected DateTime _date;
+        protected string _volume;
+        protected string _chapter;
+        protected Uri _seriesUri;
+        protected Uri _groupUri;
         
-        public SiteSearchResult(string series, string group, DateTime date, double volume, double chapter)
+        public static SiteSearchResult CreateResult(string series, Uri seriesUri, DateTime date, string volume, string chapter, string group, Uri groupUri)
         {
-            _series = series;
-            _group = group;
-            _date = date;
-            _volume = volume;
-            _chapter = chapter;
+            return new SiteSearchResult()
+            {
+                _series = series,
+                _seriesUri = seriesUri,
+                _volume = volume,
+                _chapter = chapter,
+                _group = group,
+                _groupUri = groupUri,
+                _date = date
+            };
         }
 
         public string Series
@@ -28,9 +35,25 @@ namespace MIRI.Serialization
             get { return _series; }
         }
 
+        public Uri SeriesUri
+        {
+            get
+            {
+                return _seriesUri;
+            }
+        }
+
         public string Group
         {
             get { return _group; }
+        }
+
+        public Uri GroupUri
+        {
+            get
+            {
+                return _groupUri;
+            }
         }
 
         public DateTime Date
@@ -38,14 +61,17 @@ namespace MIRI.Serialization
             get { return _date; }
         }
 
-        public double Volume
+        public string Volume
         {
             get { return _volume; }
         }
 
-        public double Chapter
+        public string Chapter
         {
             get { return _chapter; }
         }
+
+
+
     }
 }

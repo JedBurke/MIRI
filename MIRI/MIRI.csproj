@@ -47,7 +47,7 @@
     <Compile Include="Helpers\Results.cs" />
     <Compile Include="Helpers\Search.cs" />
     <Compile Include="IMangaUpdatesSearch.cs" />
-    <Compile Include="ISerializeResults.cs" />
+    <Compile Include="IResultsSerializer.cs" />
     <Compile Include="ISeriesData.cs" />
     <Compile Include="ISeriesDataParser.cs" />
     <Compile Include="MangaUpdatesSearch.cs" />
@@ -68,7 +68,7 @@
     <Compile Include="Serialization\ResultsGeneral.cs" />
     <Compile Include="Serialization\SiteSearchResults.cs" />
     <Compile Include="SerializeResults.cs" />
-    <Compile Include="SerializeResultsSiteSearch.cs" />
+    <Compile Include="SiteSearchResultsSerializer.cs" />
     <Compile Include="SeriesData.cs" />
     <Compile Include="SeriesType.cs" />
   </ItemGroup>

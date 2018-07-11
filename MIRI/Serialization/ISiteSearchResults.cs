@@ -11,7 +11,10 @@ namespace MIRI.Serialization
         string Series { get; }
         string Group { get; }
         DateTime Date { get; }
-        double Volume { get; }
-        double Chapter { get; }
+        string Volume { get; }
+        string Chapter { get; }
+
+        Uri SeriesUri { get; }
+        Uri GroupUri { get; }
     }
 }

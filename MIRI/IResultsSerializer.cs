@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MIRI
 {
-    public interface ISerializeResults : IDisposable
+    public interface IResultsSerializer : IDisposable
     {
         IResults Serialize(string data);
         IResults Serialize(byte[] data);

@@ -40,14 +40,11 @@ namespace MIRI
         /// </summary>
         /// See <see cref="LazyParsing"/>.
         private readonly bool _lazyParsing;
-
-        [Obsolete("Consider removing in favor of ParsedDocumentRootNode.")]
-        private HtmlDocument ParsedDocument;
-
+        
         /// <summary>
         /// Gets the root node of the parsed document as per the document content.
         /// </summary>
-        private readonly HtmlNode ParsedDocumentRootNode;
+        protected HtmlNode ParsedDocumentRootNode;
 
         /// <summary>
         /// The default regular expression options used to compare scrapped values against the expected values.
@@ -163,11 +160,6 @@ namespace MIRI
 
             if (!string.IsNullOrWhiteSpace(documentContent))
             {
-                ParsedDocument = new HtmlDocument();
-                ParsedDocument.LoadHtml(documentContent);
-
-                ParsedDocumentRootNode = ParsedDocument.DocumentNode;
-
                 Parse(this._documentContent, LazyParsing);
             }
         }
@@ -616,11 +608,11 @@ namespace MIRI
                 throw new ArgumentNullException();
             }
 
-            //ParsedDocument = new HtmlDocument();
-            //ParsedDocument.LoadHtml(documentContent);
+            var doc = new HtmlDocument();
+            doc.LoadHtml(documentContent);
 
-            //ParsedDocumentRootNode = ParsedDocument.DocumentNode;
-
+            ParsedDocumentRootNode = doc.DocumentNode;
+            
             /// Sets the backing fields of the respective properties if the lazy loading
             /// option has been set to false.
             if (!lazyParsing)
@@ -741,6 +733,10 @@ namespace MIRI
             return null;
 
         }
+        
+        /// Todo: Make use of the null-coalescing operator to reduce complexity
+        /// of the parsing and make everything lazy.
+        /// Example: return _author ?? (_author = GetAuthor());
 
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MIRI
 {
-    public class SerializeResults : ISerializeResults
+    public class SerializeResults : IResultsSerializer
     {
         public IResults Serialize(string data)
         {

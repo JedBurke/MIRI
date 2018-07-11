@@ -10,7 +10,7 @@ namespace MIRI
     /// <summary>
     /// Provides methods used to search and scrape manga and novel series information from Manga-Updates.
     /// </summary>
-    public interface IMangaUpdatesSearch
+    public interface IMangaUpdates
     {
         /// <summary>
         /// Asyncronously performs a search for the specified series and returns the parsed result.
