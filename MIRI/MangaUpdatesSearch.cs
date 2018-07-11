@@ -173,7 +173,7 @@ namespace MIRI
 
             if (response.Length > 0)
             {
-                results = new SerializeResultsSiteSearch().Serialize(response);
+                results = new SiteSearchResultsSerializer().Serialize(response);
             }
 
 

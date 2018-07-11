@@ -70,7 +70,7 @@ namespace MIRI_Tests
             }
             else
             {
-                var serializer = new SerializeResultsSiteSearch();
+                var serializer = new SiteSearchResultsSerializer();
                 results = serializer.Serialize(Properties.Resources.Baka_Updates_Manga___Search_Results);
             }
 

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MIRI
 {
-    public class SerializeResultsSiteSearch : ISerializeResults
+    public class SiteSearchResultsSerializer : IResultsSerializer
     {
         public Serialization.ISiteSearchResult[] Serialize(string data)
         {
@@ -60,12 +60,13 @@ namespace MIRI
         {
         }
 
-        IResults ISerializeResults.Serialize(string data)
+        IResults IResultsSerializer.Serialize(string data)
         {
             throw new NotImplementedException();
+            
         }
 
-        IResults ISerializeResults.Serialize(byte[] data)
+        IResults IResultsSerializer.Serialize(byte[] data)
         {
             throw new NotImplementedException();
         }
